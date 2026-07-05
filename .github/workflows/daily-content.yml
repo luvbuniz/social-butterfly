@@ -1,0 +1,24 @@
+name: Daily content plan
+
+on:
+  schedule:
+    # 12:00 UTC daily ≈ morning in the US. Adjust to taste.
+    - cron: '0 12 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # No npm install needed — the generator has zero runtime dependencies.
+      - run: node scripts/daily-issue.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

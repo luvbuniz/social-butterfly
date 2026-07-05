@@ -1,0 +1,24 @@
+{
+  "name": "social-butterfly",
+  "version": "0.1.0",
+  "description": "Social media idea generator, organizer, and capture toolkit for stackadoo.com",
+  "type": "module",
+  "bin": {
+    "butterfly": "bin/butterfly.js"
+  },
+  "scripts": {
+    "today": "node bin/butterfly.js ideas",
+    "plan": "node bin/butterfly.js plan",
+    "due": "node bin/butterfly.js due",
+    "pack": "node bin/butterfly.js pack",
+    "capture": "node bin/butterfly.js capture",
+    "demo": "node bin/butterfly.js capture --url demo --record 6 --shots 2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.110.0",
+    "playwright": "^1.61.1"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "site": {
+    "name": "Stackadoo",
+    "url": "https://stackadoo.com",
+    "shortUrl": "stackadoo.com",
+    "tagline": "Stack 'em high. Don't let 'em drop."
+  },
+  "series": {
+    "enabled": true,
+    "startDate": "2026-07-06",
+    "label": "posting my game until someone beats my high score"
+  },
+  "scoreRange": [42, 187],
+  "socials": {
+    "tiktok": "@stackadoo",
+    "instagram": "@stackadoo",
+    "youtube": "@stackadoo",
+    "x": "@stackadoo",
+    "facebook": "stackadoo",
+    "bluesky": "@stackadoo.com",
+    "reddit": "u/stackadoo",
+    "discord": ""
+  },
+  "hashtags": {
+    "core": ["#stackadoo", "#webgame", "#indiegame"],
+    "tiktok": ["#gaming", "#gamertok", "#browsergame", "#indiedev", "#satisfying", "#fyp"],
+    "instagram": ["#gamer", "#indiegames", "#casualgames", "#browsergames", "#gamedev", "#gamersofinstagram"],
+    "youtube": ["#shorts", "#gaming", "#indiegame"],
+    "x": ["#indiegame"],
+    "facebook": ["#indiegame"],
+    "bluesky": []
+  },
+  "rotation": ["clip", "challenge", "tip", "devlog", "cartoon", "meme", "community"],
+  "redditCommunities": ["r/WebGames", "r/playmygame", "r/IndieGaming"],
+  "capture": {
+    "defaultPreset": "vertical",
+    "outDir": "content/captures"
+  },
+  "claude": {
+    "model": "claude-opus-4-8"
+  }
+}

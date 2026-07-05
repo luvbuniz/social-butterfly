@@ -1,0 +1,431 @@
+{
+  "items": [
+    {
+      "id": "2026-07-05-community",
+      "date": "2026-07-05",
+      "pillar": "community",
+      "pillarLabel": "💬 Community / question",
+      "hook": "Poll: Stackadoo with sound ON or OFF?",
+      "platforms": [
+        "x",
+        "facebook",
+        "instagram"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-05-community",
+        "date": "2026-07-05",
+        "pillar": "community",
+        "pillarLabel": "💬 Community / question",
+        "headline": true,
+        "effort": "S",
+        "hook": "Poll: Stackadoo with sound ON or OFF?",
+        "cta": "Play free in your browser → stackadoo.com",
+        "ctaBio": "No download needed — link in bio",
+        "platforms": [
+          "x",
+          "facebook",
+          "instagram"
+        ],
+        "asset": "Text-first post; optional screenshot. Reply to EVERY comment in the first hour — replies double your reach on most platforms.",
+        "captions": {
+          "tiktok": {
+            "text": "Poll: Stackadoo with sound ON or OFF?\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "Poll: Stackadoo with sound ON or OFF?\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "Poll: Stackadoo with sound ON or OFF?",
+            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "Poll: Stackadoo with sound ON or OFF?",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Poll: Stackadoo with sound ON or OFF?\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-06-clip",
+      "date": "2026-07-06",
+      "pillar": "clip",
+      "pillarLabel": "🎬 Gameplay clip",
+      "hook": "60 seconds of pure stacking zen",
+      "platforms": [
+        "tiktok",
+        "youtube",
+        "instagram"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-06-clip",
+        "date": "2026-07-06",
+        "pillar": "clip",
+        "pillarLabel": "🎬 Gameplay clip",
+        "headline": true,
+        "effort": "S",
+        "hook": "60 seconds of pure stacking zen",
+        "cta": "One tap to play → stackadoo.com",
+        "ctaBio": "Try to beat me — link in bio 🏆",
+        "platforms": [
+          "tiktok",
+          "youtube",
+          "instagram"
+        ],
+        "asset": "Record 15–30s of gameplay in vertical: `npm run capture -- --record 25` then trim to the best 10–15s. Fails outperform wins — post the collapse.",
+        "captions": {
+          "tiktok": {
+            "text": "60 seconds of pure stacking zen\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "60 seconds of pure stacking zen\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "60 seconds of pure stacking zen",
+            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "60 seconds of pure stacking zen",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: 60 seconds of pure stacking zen\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-07-challenge",
+      "date": "2026-07-07",
+      "pillar": "challenge",
+      "pillarLabel": "🏆 Score challenge",
+      "hook": "I bet you can't get past 50 on your first try",
+      "platforms": [
+        "tiktok",
+        "x",
+        "instagram"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-07-challenge",
+        "date": "2026-07-07",
+        "pillar": "challenge",
+        "pillarLabel": "🏆 Score challenge",
+        "headline": true,
+        "effort": "S",
+        "hook": "I bet you can't get past 50 on your first try",
+        "cta": "One tap to play → stackadoo.com",
+        "ctaBio": "Try to beat me — link in bio 🏆",
+        "platforms": [
+          "tiktok",
+          "x",
+          "instagram"
+        ],
+        "asset": "Screenshot your score screen: `npm run capture -- --shots 1`. The serialized \"day N until someone beats me\" format is algorithm gold — keep the day count honest.",
+        "captions": {
+          "tiktok": {
+            "text": "I bet you can't get past 50 on your first try\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "I bet you can't get past 50 on your first try\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "I bet you can't get past 50 on your first try",
+            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "I bet you can't get past 50 on your first try",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: I bet you can't get past 50 on your first try\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-08-tip",
+      "date": "2026-07-08",
+      "pillar": "tip",
+      "pillarLabel": "💡 Tip / secret",
+      "hook": "Slow is smooth, smooth is fast — the Stackadoo mantra",
+      "platforms": [
+        "tiktok",
+        "youtube",
+        "x"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-08-tip",
+        "date": "2026-07-08",
+        "pillar": "tip",
+        "pillarLabel": "💡 Tip / secret",
+        "headline": true,
+        "effort": "S",
+        "hook": "Slow is smooth, smooth is fast — the Stackadoo mantra",
+        "cta": "Play free in your browser → stackadoo.com",
+        "ctaBio": "No download needed — link in bio",
+        "platforms": [
+          "tiktok",
+          "youtube",
+          "x"
+        ],
+        "asset": "Record the exact move you are explaining (vertical), add text overlays in TikTok/CapCut. Tips get saved & shared — great for reach.",
+        "captions": {
+          "tiktok": {
+            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "Slow is smooth, smooth is fast — the Stackadoo mantra",
+            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "Slow is smooth, smooth is fast — the Stackadoo mantra",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-09-devlog",
+      "date": "2026-07-09",
+      "pillar": "devlog",
+      "pillarLabel": "🛠️ Dev log / behind the scenes",
+      "hook": "Solo dev life: shipped a feature nobody asked for and I love it",
+      "platforms": [
+        "x",
+        "bluesky",
+        "instagram"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-09-devlog",
+        "date": "2026-07-09",
+        "pillar": "devlog",
+        "pillarLabel": "🛠️ Dev log / behind the scenes",
+        "headline": true,
+        "effort": "M",
+        "hook": "Solo dev life: shipped a feature nobody asked for and I love it",
+        "cta": "One tap to play → stackadoo.com",
+        "ctaBio": "Try to beat me — link in bio 🏆",
+        "platforms": [
+          "x",
+          "bluesky",
+          "instagram"
+        ],
+        "asset": "Grab 2–3 wide screenshots: `npm run capture -- --shots 3 --preset wide`. Build-in-public posts do best on X/Bluesky — devs love following the journey.",
+        "captions": {
+          "tiktok": {
+            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "Solo dev life: shipped a feature nobody asked for and I love it",
+            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "Solo dev life: shipped a feature nobody asked for and I love it",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Solo dev life: shipped a feature nobody asked for and I love it\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-10-cartoon",
+      "date": "2026-07-10",
+      "pillar": "cartoon",
+      "pillarLabel": "🎨 Cartoon / character",
+      "hook": "Drew this instead of fixing bugs. Worth it.",
+      "platforms": [
+        "instagram",
+        "tiktok",
+        "facebook"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-10-cartoon",
+        "date": "2026-07-10",
+        "pillar": "cartoon",
+        "pillarLabel": "🎨 Cartoon / character",
+        "headline": true,
+        "effort": "L",
+        "hook": "Drew this instead of fixing bugs. Worth it.",
+        "cta": "Play free in your browser → stackadoo.com",
+        "ctaBio": "Play free — link in bio 🧱",
+        "platforms": [
+          "instagram",
+          "tiktok",
+          "facebook"
+        ],
+        "asset": "Repurpose ONE cartoon 4–5 ways: full strip (IG/FB), one panel per day as teasers, a slow pan/animatic for TikTok, character card, reaction-meme crop. One cartoon = a week of posts.",
+        "captions": {
+          "tiktok": {
+            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "Drew this instead of fixing bugs. Worth it.",
+            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "Drew this instead of fixing bugs. Worth it.",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Drew this instead of fixing bugs. Worth it.\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-11-meme",
+      "date": "2026-07-11",
+      "pillar": "meme",
+      "pillarLabel": "😂 Meme / relatable",
+      "hook": "My tower fell and I felt that physically",
+      "platforms": [
+        "tiktok",
+        "instagram",
+        "x"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-11-meme",
+        "date": "2026-07-11",
+        "pillar": "meme",
+        "pillarLabel": "😂 Meme / relatable",
+        "headline": true,
+        "effort": "S",
+        "hook": "My tower fell and I felt that physically",
+        "cta": "No download, no signup. Just stack → stackadoo.com",
+        "ctaBio": "Play free — link in bio 🧱",
+        "platforms": [
+          "tiktok",
+          "instagram",
+          "x"
+        ],
+        "asset": "Screenshot a fail moment or crop a cartoon panel; add the caption as text on the image. Low effort, high relatability.",
+        "captions": {
+          "tiktok": {
+            "text": "My tower fell and I felt that physically\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+          },
+          "instagram": {
+            "text": "My tower fell and I felt that physically\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+          },
+          "youtube": {
+            "title": "My tower fell and I felt that physically",
+            "description": "No download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+          },
+          "x": {
+            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "facebook": {
+            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame"
+          },
+          "bluesky": {
+            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "My tower fell and I felt that physically",
+            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: My tower fell and I felt that physically\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "communities": [
+              "r/WebGames",
+              "r/playmygame",
+              "r/IndieGaming"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    }
+  ]
+}

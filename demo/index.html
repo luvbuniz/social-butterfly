@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stackadoo capture demo</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #12122b; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  #hud {
+    position: fixed; top: 4vh; left: 0; right: 0; text-align: center;
+    font: 700 9vmin/1 system-ui, sans-serif; color: #fff; letter-spacing: .02em;
+    text-shadow: 0 4px 24px rgba(0,0,0,.5);
+  }
+  #hud small { display: block; font-size: 3vmin; font-weight: 500; opacity: .7; margin-top: 1vmin; }
+</style>
+</head>
+<body>
+<div id="hud">0<small>stackadoo demo stand-in — capture test page</small></div>
+<canvas id="c"></canvas>
+<script>
+// A self-playing stacking animation so `butterfly capture` has something
+// moving to film when you can't reach the real site. Not the actual game.
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const hud = document.querySelector('#hud');
+let W, H;
+function resize() {
+  W = canvas.width = innerWidth * devicePixelRatio;
+  H = canvas.height = innerHeight * devicePixelRatio;
+}
+addEventListener('resize', resize); resize();
+
+const unit = () => Math.min(W, H);
+let blocks, score, mover, camY;
+function reset() {
+  const w = unit() * 0.45, h = unit() * 0.055;
+  blocks = [{ x: (W - w) / 2, y: H * 0.85, w, h, hue: 200 }];
+  score = 0; camY = 0;
+  newMover();
+}
+function newMover() {
+  const top = blocks[blocks.length - 1];
+  mover = {
+    x: 0, y: top.y - top.h, w: top.w, h: top.h,
+    dir: 1, speed: unit() * (0.006 + Math.random() * 0.004),
+    hue: (top.hue + 14) % 360,
+  };
+}
+function drop() {
+  const top = blocks[blocks.length - 1];
+  const overlap = Math.min(mover.x + mover.w, top.x + top.w) - Math.max(mover.x, top.x);
+  if (overlap <= 0) { reset(); return; }
+  const jitter = Math.random() < 0.75; // stay imperfect: it looks more human
+  const nx = jitter ? Math.max(mover.x, top.x) : top.x;
+  const nw = jitter ? overlap : top.w;
+  blocks.push({ x: nx, y: mover.y, w: Math.max(nw, unit() * 0.12), h: mover.h, hue: mover.hue });
+  score++;
+  hud.firstChild.textContent = score;
+  newMover();
+}
+reset();
+
+let last = 0, sinceDrop = 0;
+function frame(t) {
+  const dt = Math.min(t - last, 50); last = t;
+  sinceDrop += dt;
+
+  mover.x += mover.dir * mover.speed * dt * 0.06 * unit() * 0.01;
+  const margin = W * 0.06;
+  if (mover.x < margin) { mover.x = margin; mover.dir = 1; }
+  if (mover.x + mover.w > W - margin) { mover.x = W - margin - mover.w; mover.dir = -1; }
+
+  // auto-drop when roughly aligned, or on a timer
+  const top = blocks[blocks.length - 1];
+  const aligned = Math.abs(mover.x - top.x) < mover.w * 0.18;
+  if ((aligned && sinceDrop > 450) || sinceDrop > 1600) { drop(); sinceDrop = 0; }
+
+  // camera follows the tower up
+  const targetCam = Math.max(0, H * 0.85 - blocks[blocks.length - 1].y);
+  camY += (targetCam - camY) * 0.06;
+
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#1b1b3f'); g.addColorStop(1, '#0d0d1f');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  ctx.save();
+  ctx.translate(0, camY);
+  for (const b of blocks) {
+    ctx.fillStyle = `hsl(${b.hue} 75% 58%)`;
+    ctx.fillRect(b.x, b.y, b.w, b.h);
+    ctx.fillStyle = 'rgba(255,255,255,.16)';
+    ctx.fillRect(b.x, b.y, b.w, b.h * 0.28);
+  }
+  ctx.fillStyle = `hsl(${mover.hue} 85% 66%)`;
+  ctx.fillRect(mover.x, mover.y, mover.w, mover.h);
+  ctx.restore();
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
