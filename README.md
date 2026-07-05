@@ -64,12 +64,15 @@ This films **your own site with your own browser** — no platform ToS involved.
 Never point browser automation at a *social platform* while logged in; see
 [docs/SAFE_AUTOMATION.md](docs/SAFE_AUTOMATION.md).
 
-## Daily ideas delivered to you (GitHub Action)
+## Daily ideas delivered to you (GitHub Action) — no terminal needed
 
 `.github/workflows/daily-content.yml` opens an issue in this repo every morning
 (12:00 UTC) titled **“📅 Content plan — YYYY-MM-DD”** with the day's ideas, captions,
-and a checklist. Trigger it manually from the Actions tab with *Run workflow*, change
-the cron to your timezone, or delete the file if you'd rather pull ideas locally.
+one-click share links, and a checklist. That means the entire posting routine can be
+done from a web browser: open the issue → click a share link or paste a caption →
+post → tick the checkbox. Trigger it any time from the Actions tab with *Run
+workflow*, change the cron to your timezone, or delete the file if you'd rather work
+locally. The terminal is only needed for the capture tool and the local queue.
 
 ## Optional: Claude caption punch-up
 

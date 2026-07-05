@@ -2,10 +2,12 @@
 // Zero platform APIs touched — this automates YOUR morning routine, nothing else.
 import { loadConfig, todayStr } from '../src/util.js';
 import { generateIdeas } from '../src/ideas.js';
+import { shareLinks } from '../src/pack.js';
 
+const dryRun = process.env.DRY_RUN === '1';
 const token = process.env.GITHUB_TOKEN;
 const repo = process.env.GITHUB_REPOSITORY;
-if (!token || !repo) {
+if (!dryRun && (!token || !repo)) {
   console.error('GITHUB_TOKEN and GITHUB_REPOSITORY are required (run me inside Actions).');
   process.exit(1);
 }
@@ -35,6 +37,20 @@ for (const idea of ideas) {
     lines.push('</details>');
     lines.push('');
   }
+  if (idea.headline) {
+    const links = shareLinks(config, idea);
+    lines.push(
+      '**One-click share** (opens a prefilled compose window — you press Post): ' +
+        Object.entries(links)
+          .map(([k, v]) => `[${k}](${v})`)
+          .join(' · ')
+    );
+    lines.push('');
+    lines.push(
+      '_TikTok / Instagram / YouTube have no prefill links — upload your clip there and paste the caption above._'
+    );
+    lines.push('');
+  }
 }
 lines.push('---');
 lines.push('- [ ] capture media (`npm run capture -- --record 20`)');
@@ -42,6 +58,12 @@ lines.push('- [ ] post the ⭐ idea (then `node bin/butterfly.js done <id>`)');
 lines.push('- [ ] reply to every comment within the first hour');
 lines.push('');
 lines.push('_Close this issue when done. Posting stays manual on purpose — see docs/SAFE_AUTOMATION.md._');
+
+if (dryRun) {
+  console.log(`--- DRY RUN: 📅 Content plan — ${date} ---\n`);
+  console.log(lines.join('\n'));
+  process.exit(0);
+}
 
 const res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
   method: 'POST',
