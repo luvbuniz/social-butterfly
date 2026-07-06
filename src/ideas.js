@@ -75,9 +75,10 @@ export function buildCaption(config, idea, platform) {
     // Reddit hates marketing-speak and hashtags. Honest title + maker context.
     const title = idea.hook.replace(/#[\w]+/g, '').trim();
     const body =
-      `I'm the solo dev behind ${config.site.name}, a free browser stacking game — ` +
-      `no download, no signup. Today's post: ${idea.hook}\n\n` +
-      `Play here: ${url}\n\nWould genuinely love feedback (be brutal).`;
+      `I'm a parent and the solo dev behind ${config.site.name} — a math game where kids ` +
+      `build 3D worlds by solving problems (the math is the way you earn blocks). ` +
+      `Free to play on tablets via the site; Google Play version on the way.\n\n` +
+      `${url}\n\nWould genuinely love feedback from other parents (be brutal).`;
     return {
       title,
       body,

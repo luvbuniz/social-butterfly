@@ -1,104 +1,121 @@
 # Stackadoo traffic playbook
 
-The honest version first: for a new browser game, **social posting alone is the slow road**.
-The fast roads are (A) making the game itself shareable, and (B) putting it where players
-already are. Social content then compounds on top. Do all three, in that order.
+**Audience: parents.** Stackadoo is "the math game kids actually ask to play" — kids
+build 3D worlds by earning blocks through math. The person you're talking to online
+is a parent (homeschool parents especially), not a gamer. Every caption, hashtag,
+and channel choice follows from that.
+
+**The offer to lead with:** *free on a tablet, straight from the site — nothing to
+download.* That kills the two biggest objections (price, "another app to install")
+in one line. When the Google Play version ships, that becomes the second big beat.
+
+**One rule that's not optional:** market **to parents, never to kids**. Kid-directed
+advertising trips COPPA and platform policies; parent-directed content about your
+kids' product is completely fine. All the generated captions already speak
+parent-to-parent — keep it that way.
 
 ---
 
-## A. Make the game do the marketing (highest leverage, zero cost)
+## A. Make the game do the marketing (highest leverage)
 
-These are site features, not posts. Each one turns players into your posters.
+Site features, not posts — each one turns families into promoters:
 
-1. **Share-my-score button.** After a run ends, show a big "Share" button that produces
-   a pre-filled post ("I stacked 87 on Stackadoo 🧱 can you beat me? stackadoo.com").
-   Use the Web Share API on mobile and the same intent links social-butterfly generates
-   (`src/pack.js`) on desktop. This is how Wordle grew — the emoji grid was a share button.
-2. **Daily challenge.** Same seed/sequence for everyone each day, resets at midnight.
-   It gives players a reason to return daily AND a reason to compare scores publicly.
-   Bonus: "Daily #41" posts write themselves — your daily content problem half-solves itself.
-3. **Open Graph + Twitter Card tags.** When anyone pastes stackadoo.com anywhere, it should
-   show a bright gameplay image, the tagline, and a play button vibe — not a bare link.
-   One meta-tag afternoon, permanent payoff.
-4. **A tiny leaderboard.** Even top-10 with initials. Screenshot of it = a weekly post,
-   and players screenshot it themselves when they get on it.
+1. **Share button for parents** (`site-snippets/share-score.html`): after a session,
+   let the parent share "My kid solved 87 math problems building a world 🧱". A
+   proud-parent brag is the most credible ad that exists.
+2. **Open Graph tags** (`site-snippets/og-tags.html`): pasted links in Facebook
+   groups and group chats must show the pitch card, not a bare URL — most parent
+   discovery happens in exactly those two places.
+3. **A "what your kid practiced" recap** (weekly email or end-of-session screen):
+   parents stay for proof of learning. Screenshots of these recaps are also
+   perfect social content.
+4. **Printables** (coloring pages of the characters, a "math bingo" sheet):
+   printables are Pinterest and homeschool-newsletter currency, and each one
+   carries your logo and URL into the house.
 
-## B. Distribution — go where the players already are
+## B. Distribution — where parents actually look
 
-1. **Web game portals** (biggest single lever for browser games). Submit Stackadoo to
-   CrazyGames, Poki, itch.io, Newgrounds, and GameJolt. Portals have millions of players
-   actively looking for new games and they link back to your site. Search results for
-   stacking games are dominated by portal listings (Coolmath, Poki, etc.) — be *in* those
-   catalogs rather than competing with them from a lone domain.
-2. **Reddit, done respectfully.** r/WebGames, r/playmygame, and r/IndieGaming welcome
-   makers who follow the rules. 2–3 posts per WEEK max across different subs, always as
-   yourself ("I'm the solo dev…"), always replying to comments. Reddit hates marketing
-   and loves makers.
-3. **Discord.** Join indie-game and web-game servers; most have a showcase channel.
-   Later, your own server becomes the home for your regulars and playtesters.
-4. **Show HN / Product Hunt** — one-shot spikes, worth doing once the site has the share
-   button and OG tags so the spike converts.
+1. **Facebook groups** — homeschool groups, "kids activities" groups, grade-level
+   parent groups. Join as yourself, be useful for a week before ever mentioning
+   the game, then share as "I'm a parent and I built this." Weekly, not daily.
+2. **Pinterest** — the sleeping giant for kids' education. Teachers and homeschool
+   parents live there, pins compound for years (unlike posts that die in a day).
+   Pin every cartoon, printable, tip-graphic, and world-screenshot. The share links
+   in your packs already include Pinterest.
+3. **Educational directories & review sites** — being listed is passive, compounding
+   traffic: Common Sense Media, educational-app roundups, homeschool-curriculum
+   blogs (many review free tools happily). One outreach email each is worth more
+   than a month of posting.
+4. **Reddit, carefully** — r/homeschool and r/matheducation welcome makers who
+   follow the rules; big parenting subs usually restrict promo to weekly threads.
+   The generated Reddit caption is already worded parent-dev-honest.
+5. **Google Play launch** (when ready) — a launch is a content event: "it's out"
+   posts everywhere, ask early families for reviews (store reviews are the whole
+   ballgame for app discovery), and update every bio link.
 
 ## C. The content engine (what this repo automates)
 
-**Cadence that won't burn you out (~20–30 min/day):**
+**Cadence (~20–30 min/day):**
 
 | Daily | Weekly |
 |---|---|
-| 1 short vertical clip → TikTok, then reuse on YouTube Shorts + Reels | 1 dev-log post (X/Bluesky) |
-| 1 text post on X or Bluesky (score callout, tip, or question) | 1 cartoon drop, repurposed 4–5 ways |
-| reply to every comment | 2–3 Reddit posts (not daily!) |
+| 1 short vertical clip → TikTok + Reels + Shorts | 1–2 Facebook group shares (value-first) |
+| 1 text post (Facebook page / X) | 1 cartoon drop, repurposed 4–5 ways |
+| reply to every comment | a few Pinterest pins + 1 Reddit post max |
 
-**Why short vertical video is the engine:** TikTok/Shorts/Reels are the only major
-surfaces where brand-new accounts regularly reach thousands of strangers. Games are
-perfect for it, and **fails outperform wins** — the tower collapsing gets comments
-("you had ONE job"), and comments are the algorithm's favorite food.
+**Why short vertical video still leads:** parents scroll TikTok and Reels too —
+#momsoftiktok is enormous — and the algorithm reaches strangers on day one. The
+highest-performing formats for kids' products are: the **transformation** ("math
+battle → kid asking for more"), the **over-the-shoulder** clip of a kid building
+(hands and screen only — no faces needed), and the **honest parent-dev story**
+("math time was a nightly fight at our house, so I built this").
 
-**The flagship format — run this as a series:**
-> "Day 12 of posting my game until someone beats my high score (87)"
+**The flagship series:** *"Day {N} of building the math game kids actually ask to
+play."* Build-in-public, parent-to-parent. The generator tracks the day number
+(`series` in butterfly.config.json). Milestone days (first family, first 1,000
+problems solved, Play Store approval) are your best posts — save screenshots.
 
-Serialized formats compound: day counts create curiosity, challenges create comments,
-and the day you lose your own record is your best-performing post ever. The generator
-tracks the day number automatically (`series` in butterfly.config.json).
+**The 8 pillars** (rotated Mon–Sun by the planner): gameplay clip · kid progress ·
+parent tip · behind-the-scenes · cartoon · parent meme · parent question · milestone.
 
-**The 8 content pillars** (rotated Mon–Sun by `npm run plan`, see `src/pillars.js`):
-clip · challenge · tip · dev-log · cartoon · meme · community · milestone.
-Rotation prevents both audience fatigue and "repetitive content" flags.
+**Cartoons:** post each one 4–5 ways (strip → panels → animatic → character card →
+**printable coloring page**). The printable version is the secret weapon — parents
+print it, kids ask what it's from.
 
-**Cartoons:** they're your most expensive asset, so never post one only once.
-One cartoon = full strip (IG/FB) + per-panel teasers (3 days of stories) + slow-pan
-animatic with music (TikTok/Reels) + character card + reaction-meme crop. Keep the
-cadence weekly or biweekly; the generator schedules them as one pillar, not a daily grind.
+**Platform priorities for a parents-of-kids product:**
+1. **Facebook** — where parent communities actually are; groups > page
+2. **Instagram Reels** — parent-heavy, cartoon-friendly
+3. **TikTok** — biggest cold reach via #momsoftiktok / #homeschool
+4. **Pinterest** — compounding evergreen traffic from printables & tips
+5. **YouTube Shorts** — same clips, builds a permanent library
+6. X / Bluesky — for the build-in-public dev story and edtech crowd
 
-**Platform priorities for a game with zero audience:**
-1. **TikTok** — best cold-start reach, gaming-native audience
-2. **YouTube Shorts** — same clips, second algorithm, builds a permanent library
-3. **X / Bluesky** — indie-dev community, build-in-public posts, low effort
-4. **Instagram Reels** — same clips again; feed posts for cartoons
-5. **Reddit** — weekly, high-value, follow the rules
-6. Facebook/Pinterest — only if effort is left over
+## D. SEO for the site
 
-## D. SEO for the site (slow but free)
-
-- "Stackadoo" is a unique name — you'll own that query fast. The battle is generic terms.
-- Add pages that accumulate: **how to play**, **FAQ** ("is Stackadoo free?", "how do I
-  get a high score?"), a **changelog/news** page (freshness signal + dev-log crossposts),
-  and if you do the daily challenge, a page per day ("Stackadoo Daily #41") — those
-  compound into hundreds of indexed pages.
-- Page titles matter: "Stackadoo — free online stacking game, no download" beats "Home".
+- Own "stackadoo" (easy), then chase parent phrases: "math game for 7 year old",
+  "free math games no download", "math practice kids actually like". Put those
+  words in real page copy, titles, and an FAQ.
+- Pages that compound: **how it works** (for parents), **FAQ** ("is it free?",
+  "what ages?", "is it safe?"), **changelog/news**, and eventually a **printables
+  page** — printables rank and get linked by homeschool blogs.
+- Title tag: "Stackadoo — free math game for kids, no download (tablet & web)"
+  beats anything clever.
 
 ## E. Measure just enough
 
-- Watch **one number per platform**: TikTok = average views per clip; X = replies;
-  Reddit = upvote ratio; site = plays per day (any lightweight analytics).
-- Give any experiment 2 weeks before judging it. Double down on the one format that
-  outperforms; drop the one nobody engages with. The rotation makes this comparison easy.
+- Cloudflare/GA4 (see the Results card in the dashboard): watch **visitors by
+  source** weekly — the utm tags on your share links label each platform.
+- In the dashboard, log views per post; after two weeks, double down on the pillar
+  and platform that win. For a parents product, expect Facebook + Pinterest to
+  quietly beat everything else on *site visits* even when TikTok wins on *views*.
 
 ## The first two weeks, concretely
 
-1. Ship the share-my-score button + OG tags (section A) — before heavy posting.
-2. Create accounts everywhere, post 2–3 warm-up posts manually (see SAFE_AUTOMATION.md).
-3. Submit to itch.io + one portal.
-4. Start the "day N until someone beats my score" series on TikTok/Shorts.
-5. `npm run plan` every Sunday; `npm run due` every morning; post; mark `done`; keep the streak.
-6. One respectful Reddit intro post in r/WebGames ("I made a free stacking game, feedback welcome").
+1. Ship the OG tags + parent share button (section A) — before heavy posting.
+2. Set up accounts with the parent-facing bio: "The math game kids actually ask to
+   play. Built by a parent. Free on tablets → stackadoo.com".
+3. Start the "Day N of building the math game kids ask to play" series (TikTok/Reels).
+4. Join 3–5 Facebook homeschool/parent groups and just be helpful (no links yet).
+5. `npm start` every morning: capture with auto-play, post the day's idea, tick it off.
+6. Week 2: one honest intro post in r/homeschool; email Common Sense Media and two
+   homeschool bloggers; first value-share in one Facebook group.

@@ -3,16 +3,17 @@
     "name": "Stackadoo",
     "url": "https://stackadoo.com",
     "shortUrl": "stackadoo.com",
-    "tagline": "Stack 'em high. Don't let 'em drop."
+    "tagline": "The math game kids actually ask to play.",
+    "playStoreUrl": ""
   },
   "series": {
     "enabled": true,
     "startDate": "2026-07-06",
-    "label": "posting my game until someone beats my high score"
+    "label": "building the math game kids actually ask to play"
   },
   "scoreRange": [
-    42,
-    187
+    38,
+    240
   ],
   "socials": {
     "tiktok": "@stackadoo",
@@ -27,35 +28,37 @@
   "hashtags": {
     "core": [
       "#stackadoo",
-      "#webgame",
-      "#indiegame"
+      "#mathforkids",
+      "#kidsgames"
     ],
     "tiktok": [
-      "#gaming",
-      "#gamertok",
-      "#browsergame",
-      "#indiedev",
-      "#satisfying",
-      "#fyp"
+      "#momsoftiktok",
+      "#dadsoftiktok",
+      "#homeschool",
+      "#kidsactivities",
+      "#screentime",
+      "#edtech"
     ],
     "instagram": [
-      "#gamer",
-      "#indiegames",
-      "#casualgames",
-      "#browsergames",
-      "#gamedev",
-      "#gamersofinstagram"
+      "#homeschooling",
+      "#momlife",
+      "#parentingtips",
+      "#earlylearning",
+      "#mathisfun",
+      "#kidsapps",
+      "#learningthroughplay"
     ],
     "youtube": [
       "#shorts",
-      "#gaming",
-      "#indiegame"
+      "#mathforkids",
+      "#homeschool"
     ],
     "x": [
-      "#indiegame"
+      "#edtech"
     ],
     "facebook": [
-      "#indiegame"
+      "#homeschool",
+      "#parenting"
     ],
     "bluesky": []
   },
@@ -69,9 +72,9 @@
     "community"
   ],
   "redditCommunities": [
-    "r/WebGames",
-    "r/playmygame",
-    "r/IndieGaming"
+    "r/homeschool",
+    "/r/matheducation",
+    "r/EdTech"
   ],
   "capture": {
     "defaultPreset": "vertical",

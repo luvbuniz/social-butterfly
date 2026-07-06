@@ -1,76 +1,16 @@
 {
   "items": [
     {
-      "id": "2026-07-05-community",
-      "date": "2026-07-05",
-      "pillar": "community",
-      "pillarLabel": "💬 Community / question",
-      "hook": "Poll: Stackadoo with sound ON or OFF?",
-      "platforms": [
-        "x",
-        "facebook",
-        "instagram"
-      ],
-      "status": "todo",
-      "idea": {
-        "id": "2026-07-05-community",
-        "date": "2026-07-05",
-        "pillar": "community",
-        "pillarLabel": "💬 Community / question",
-        "headline": true,
-        "effort": "S",
-        "hook": "Poll: Stackadoo with sound ON or OFF?",
-        "cta": "Play free in your browser → stackadoo.com",
-        "ctaBio": "No download needed — link in bio",
-        "platforms": [
-          "x",
-          "facebook",
-          "instagram"
-        ],
-        "asset": "Text-first post; optional screenshot. Reply to EVERY comment in the first hour — replies double your reach on most platforms.",
-        "captions": {
-          "tiktok": {
-            "text": "Poll: Stackadoo with sound ON or OFF?\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
-          },
-          "instagram": {
-            "text": "Poll: Stackadoo with sound ON or OFF?\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
-          },
-          "youtube": {
-            "title": "Poll: Stackadoo with sound ON or OFF?",
-            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
-          },
-          "x": {
-            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
-          },
-          "facebook": {
-            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
-          },
-          "bluesky": {
-            "text": "Poll: Stackadoo with sound ON or OFF?\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
-          },
-          "reddit": {
-            "title": "Poll: Stackadoo with sound ON or OFF?",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Poll: Stackadoo with sound ON or OFF?\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
-            "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
-            ],
-            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
-          }
-        }
-      }
-    },
-    {
       "id": "2026-07-06-clip",
       "date": "2026-07-06",
       "pillar": "clip",
       "pillarLabel": "🎬 Gameplay clip",
-      "hook": "60 seconds of pure stacking zen",
+      "hook": "Screen time you don't have to feel guilty about",
       "platforms": [
         "tiktok",
+        "instagram",
         "youtube",
-        "instagram"
+        "facebook"
       ],
       "status": "todo",
       "idea": {
@@ -80,42 +20,43 @@
         "pillarLabel": "🎬 Gameplay clip",
         "headline": true,
         "effort": "S",
-        "hook": "60 seconds of pure stacking zen",
-        "cta": "One tap to play → stackadoo.com",
-        "ctaBio": "Try to beat me — link in bio 🏆",
+        "hook": "Screen time you don't have to feel guilty about",
+        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
+        "ctaBio": "Try it on the family tablet — link in bio (free)",
         "platforms": [
           "tiktok",
+          "instagram",
           "youtube",
-          "instagram"
+          "facebook"
         ],
-        "asset": "Record 15–30s of gameplay in vertical: `npm run capture -- --record 25` then trim to the best 10–15s. Fails outperform wins — post the collapse.",
+        "asset": "Record 15–30s of world-building with auto-play: use the Capture studio (auto-play ON) or `npm run capture -- --auto --record 25`. The \"problem solved → block earned\" moment is the money shot.",
         "captions": {
           "tiktok": {
-            "text": "60 seconds of pure stacking zen\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "Screen time you don't have to feel guilty about\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "60 seconds of pure stacking zen\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "Screen time you don't have to feel guilty about\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "60 seconds of pure stacking zen",
-            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "Screen time you don't have to feel guilty about",
+            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "60 seconds of pure stacking zen\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
           },
           "reddit": {
-            "title": "60 seconds of pure stacking zen",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: 60 seconds of pure stacking zen\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "Screen time you don't have to feel guilty about",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
@@ -126,57 +67,57 @@
       "id": "2026-07-07-challenge",
       "date": "2026-07-07",
       "pillar": "challenge",
-      "pillarLabel": "🏆 Score challenge",
-      "hook": "I bet you can't get past 50 on your first try",
+      "pillarLabel": "🏆 Kid progress / brag",
+      "hook": "The average session sneaks in dozens of math problems. They think they're just building.",
       "platforms": [
-        "tiktok",
-        "x",
-        "instagram"
+        "facebook",
+        "instagram",
+        "tiktok"
       ],
       "status": "todo",
       "idea": {
         "id": "2026-07-07-challenge",
         "date": "2026-07-07",
         "pillar": "challenge",
-        "pillarLabel": "🏆 Score challenge",
+        "pillarLabel": "🏆 Kid progress / brag",
         "headline": true,
         "effort": "S",
-        "hook": "I bet you can't get past 50 on your first try",
-        "cta": "One tap to play → stackadoo.com",
-        "ctaBio": "Try to beat me — link in bio 🏆",
+        "hook": "The average session sneaks in dozens of math problems. They think they're just building.",
+        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
+        "ctaBio": "Try it on the family tablet — link in bio (free)",
         "platforms": [
-          "tiktok",
-          "x",
-          "instagram"
+          "facebook",
+          "instagram",
+          "tiktok"
         ],
-        "asset": "Screenshot your score screen: `npm run capture -- --shots 1`. The serialized \"day N until someone beats me\" format is algorithm gold — keep the day count honest.",
+        "asset": "Screenshot a finished kid-built world or the progress screen: `npm run capture -- --auto --shots 2`. Real numbers beat invented ones — swap in stats from your dashboard when you have them.",
         "captions": {
           "tiktok": {
-            "text": "I bet you can't get past 50 on your first try\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "The average session sneaks in dozens of math problems. They think they're just building.\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "I bet you can't get past 50 on your first try\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "The average session sneaks in dozens of math problems. They think they're just building.\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "I bet you can't get past 50 on your first try",
-            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "The average session sneaks in dozens of math problems. They think they're just building.",
+            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "The average session sneaks in dozens of math problems. They think they're just building.\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "The average session sneaks in dozens of math problems. They think they're just building.\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "I bet you can't get past 50 on your first try\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+            "text": "The average session sneaks in dozens of math problems. They think they're just building.\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
           },
           "reddit": {
-            "title": "I bet you can't get past 50 on your first try",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: I bet you can't get past 50 on your first try\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "The average session sneaks in dozens of math problems. They think they're just building.",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
@@ -187,57 +128,57 @@
       "id": "2026-07-08-tip",
       "date": "2026-07-08",
       "pillar": "tip",
-      "pillarLabel": "💡 Tip / secret",
-      "hook": "Slow is smooth, smooth is fast — the Stackadoo mantra",
+      "pillarLabel": "💡 Parent tip",
+      "hook": "Why kids remember math they USED (and forget math they memorized)",
       "platforms": [
-        "tiktok",
-        "youtube",
-        "x"
+        "instagram",
+        "facebook",
+        "tiktok"
       ],
       "status": "todo",
       "idea": {
         "id": "2026-07-08-tip",
         "date": "2026-07-08",
         "pillar": "tip",
-        "pillarLabel": "💡 Tip / secret",
+        "pillarLabel": "💡 Parent tip",
         "headline": true,
         "effort": "S",
-        "hook": "Slow is smooth, smooth is fast — the Stackadoo mantra",
-        "cta": "Play free in your browser → stackadoo.com",
-        "ctaBio": "No download needed — link in bio",
+        "hook": "Why kids remember math they USED (and forget math they memorized)",
+        "cta": "Free on tablets → stackadoo.com",
+        "ctaBio": "Math they'll actually ask for — link in bio",
         "platforms": [
-          "tiktok",
-          "youtube",
-          "x"
+          "instagram",
+          "facebook",
+          "tiktok"
         ],
-        "asset": "Record the exact move you are explaining (vertical), add text overlays in TikTok/CapCut. Tips get saved & shared — great for reach.",
+        "asset": "Text-over-video or a carousel: film gameplay (auto-play capture) and add the tip as on-screen text in CapCut/Canva. Tips get SAVED by parents — saves boost reach the most.",
         "captions": {
           "tiktok": {
-            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "Why kids remember math they USED (and forget math they memorized)\n\nMath they'll actually ask for — link in bio\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nNo download needed — link in bio\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "Why kids remember math they USED (and forget math they memorized)\n\nMath they'll actually ask for — link in bio\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "Slow is smooth, smooth is fast — the Stackadoo mantra",
-            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "Why kids remember math they USED (and forget math they memorized)",
+            "description": "Free on tablets → stackadoo.com\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Why kids remember math they USED (and forget math they memorized)\n\nFree on tablets → stackadoo.com\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Why kids remember math they USED (and forget math they memorized)\n\nFree on tablets → stackadoo.com\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
+            "text": "Why kids remember math they USED (and forget math they memorized)\n\nFree on tablets → stackadoo.com\n\n#stackadoo"
           },
           "reddit": {
-            "title": "Slow is smooth, smooth is fast — the Stackadoo mantra",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Slow is smooth, smooth is fast — the Stackadoo mantra\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "Why kids remember math they USED (and forget math they memorized)",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
@@ -248,57 +189,57 @@
       "id": "2026-07-09-devlog",
       "date": "2026-07-09",
       "pillar": "devlog",
-      "pillarLabel": "🛠️ Dev log / behind the scenes",
-      "hook": "Solo dev life: shipped a feature nobody asked for and I love it",
+      "pillarLabel": "🛠️ Behind the scenes (parent-dev)",
+      "hook": "The cartoon characters my kids helped design 🎨",
       "platforms": [
-        "x",
-        "bluesky",
-        "instagram"
+        "facebook",
+        "instagram",
+        "x"
       ],
       "status": "todo",
       "idea": {
         "id": "2026-07-09-devlog",
         "date": "2026-07-09",
         "pillar": "devlog",
-        "pillarLabel": "🛠️ Dev log / behind the scenes",
+        "pillarLabel": "🛠️ Behind the scenes (parent-dev)",
         "headline": true,
         "effort": "M",
-        "hook": "Solo dev life: shipped a feature nobody asked for and I love it",
-        "cta": "One tap to play → stackadoo.com",
-        "ctaBio": "Try to beat me — link in bio 🏆",
+        "hook": "The cartoon characters my kids helped design 🎨",
+        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
+        "ctaBio": "Try it on the family tablet — link in bio (free)",
         "platforms": [
-          "x",
-          "bluesky",
-          "instagram"
+          "facebook",
+          "instagram",
+          "x"
         ],
-        "asset": "Grab 2–3 wide screenshots: `npm run capture -- --shots 3 --preset wide`. Build-in-public posts do best on X/Bluesky — devs love following the journey.",
+        "asset": "Wide screenshots (`--preset wide --shots 3`) or a phone selfie-video. The \"parent who built the thing\" story is your unfair advantage — no big edtech company has it.",
         "captions": {
           "tiktok": {
-            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "The cartoon characters my kids helped design 🎨\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nTry to beat me — link in bio 🏆\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "The cartoon characters my kids helped design 🎨\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "Solo dev life: shipped a feature nobody asked for and I love it",
-            "description": "One tap to play → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "The cartoon characters my kids helped design 🎨",
+            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "The cartoon characters my kids helped design 🎨\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "The cartoon characters my kids helped design 🎨\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "Solo dev life: shipped a feature nobody asked for and I love it\n\nOne tap to play → stackadoo.com\n\n#stackadoo"
+            "text": "The cartoon characters my kids helped design 🎨\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
           },
           "reddit": {
-            "title": "Solo dev life: shipped a feature nobody asked for and I love it",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Solo dev life: shipped a feature nobody asked for and I love it\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "The cartoon characters my kids helped design 🎨",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
@@ -310,11 +251,11 @@
       "date": "2026-07-10",
       "pillar": "cartoon",
       "pillarLabel": "🎨 Cartoon / character",
-      "hook": "Drew this instead of fixing bugs. Worth it.",
+      "hook": "Drew this instead of sleeping. The kids say it was worth it.",
       "platforms": [
         "instagram",
-        "tiktok",
-        "facebook"
+        "facebook",
+        "tiktok"
       ],
       "status": "todo",
       "idea": {
@@ -324,42 +265,42 @@
         "pillarLabel": "🎨 Cartoon / character",
         "headline": true,
         "effort": "L",
-        "hook": "Drew this instead of fixing bugs. Worth it.",
-        "cta": "Play free in your browser → stackadoo.com",
-        "ctaBio": "Play free — link in bio 🧱",
+        "hook": "Drew this instead of sleeping. The kids say it was worth it.",
+        "cta": "Free on tablets → stackadoo.com",
+        "ctaBio": "Free on tablets — link in bio 🧱",
         "platforms": [
           "instagram",
-          "tiktok",
-          "facebook"
+          "facebook",
+          "tiktok"
         ],
-        "asset": "Repurpose ONE cartoon 4–5 ways: full strip (IG/FB), one panel per day as teasers, a slow pan/animatic for TikTok, character card, reaction-meme crop. One cartoon = a week of posts.",
+        "asset": "Repurpose ONE cartoon 4–5 ways: full strip (IG/FB), one panel per day as teasers, a slow pan with music (Reels/TikTok), character card, printable coloring-page version (parents LOVE printables — great Pinterest material).",
         "captions": {
           "tiktok": {
-            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "Drew this instead of sleeping. The kids say it was worth it.\n\nFree on tablets — link in bio 🧱\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "Drew this instead of sleeping. The kids say it was worth it.\n\nFree on tablets — link in bio 🧱\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "Drew this instead of fixing bugs. Worth it.",
-            "description": "Play free in your browser → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "Drew this instead of sleeping. The kids say it was worth it.",
+            "description": "Free on tablets → stackadoo.com\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Drew this instead of sleeping. The kids say it was worth it.\n\nFree on tablets → stackadoo.com\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "Drew this instead of sleeping. The kids say it was worth it.\n\nFree on tablets → stackadoo.com\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "Drew this instead of fixing bugs. Worth it.\n\nPlay free in your browser → stackadoo.com\n\n#stackadoo"
+            "text": "Drew this instead of sleeping. The kids say it was worth it.\n\nFree on tablets → stackadoo.com\n\n#stackadoo"
           },
           "reddit": {
-            "title": "Drew this instead of fixing bugs. Worth it.",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: Drew this instead of fixing bugs. Worth it.\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "Drew this instead of sleeping. The kids say it was worth it.",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
@@ -370,57 +311,118 @@
       "id": "2026-07-11-meme",
       "date": "2026-07-11",
       "pillar": "meme",
-      "pillarLabel": "😂 Meme / relatable",
-      "hook": "My tower fell and I felt that physically",
+      "pillarLabel": "😂 Parent meme",
+      "hook": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)",
       "platforms": [
-        "tiktok",
+        "facebook",
         "instagram",
-        "x"
+        "tiktok"
       ],
       "status": "todo",
       "idea": {
         "id": "2026-07-11-meme",
         "date": "2026-07-11",
         "pillar": "meme",
-        "pillarLabel": "😂 Meme / relatable",
+        "pillarLabel": "😂 Parent meme",
         "headline": true,
         "effort": "S",
-        "hook": "My tower fell and I felt that physically",
-        "cta": "No download, no signup. Just stack → stackadoo.com",
-        "ctaBio": "Play free — link in bio 🧱",
+        "hook": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)",
+        "cta": "Grab the family tablet and go to stackadoo.com — free to play",
+        "ctaBio": "Free on tablets — link in bio 🧱",
         "platforms": [
-          "tiktok",
+          "facebook",
+          "instagram",
+          "tiktok"
+        ],
+        "asset": "Screenshot + bold caption text on the image (Canva). Relatable parenting humor travels further in Facebook groups than anything polished.",
+        "captions": {
+          "tiktok": {
+            "text": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)\n\nFree on tablets — link in bio 🧱\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
+          },
+          "instagram": {
+            "text": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)\n\nFree on tablets — link in bio 🧱\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
+          },
+          "youtube": {
+            "title": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)",
+            "description": "Grab the family tablet and go to stackadoo.com — free to play\n\n#stackadoo #mathforkids #kidsgames #shorts"
+          },
+          "x": {
+            "text": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)\n\nGrab the family tablet and go to stackadoo.com — free to play\n\n#stackadoo #mathforkids"
+          },
+          "facebook": {
+            "text": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)\n\nGrab the family tablet and go to stackadoo.com — free to play\n\n#stackadoo #mathforkids"
+          },
+          "bluesky": {
+            "text": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)\n\nGrab the family tablet and go to stackadoo.com — free to play\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "Nobody: … My kid at dinner: 'want to hear a math fact?' (yes. always yes.)",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
+            "communities": [
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
+    },
+    {
+      "id": "2026-07-12-community",
+      "date": "2026-07-12",
+      "pillar": "community",
+      "pillarLabel": "💬 Parent question",
+      "hook": "What's the one subject your kid fights you on? (Math parents, I see you)",
+      "platforms": [
+        "facebook",
+        "instagram",
+        "x"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-12-community",
+        "date": "2026-07-12",
+        "pillar": "community",
+        "pillarLabel": "💬 Parent question",
+        "headline": true,
+        "effort": "S",
+        "hook": "What's the one subject your kid fights you on? (Math parents, I see you)",
+        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
+        "ctaBio": "Try it on the family tablet — link in bio (free)",
+        "platforms": [
+          "facebook",
           "instagram",
           "x"
         ],
-        "asset": "Screenshot a fail moment or crop a cartoon panel; add the caption as text on the image. Low effort, high relatability.",
+        "asset": "Text-first post; optional screenshot. Reply to EVERY comment — in parent groups the comments ARE the marketing.",
         "captions": {
           "tiktok": {
-            "text": "My tower fell and I felt that physically\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gaming #gamertok #browsergame #indiedev #satisfying"
+            "text": "What's the one subject your kid fights you on? (Math parents, I see you)\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
           },
           "instagram": {
-            "text": "My tower fell and I felt that physically\n\nPlay free — link in bio 🧱\n\n#stackadoo #webgame #indiegame #gamer #indiegames #casualgames #browsergames #gamedev #gamersofinstagram"
+            "text": "What's the one subject your kid fights you on? (Math parents, I see you)\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
           },
           "youtube": {
-            "title": "My tower fell and I felt that physically",
-            "description": "No download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame #indiegame #shorts"
+            "title": "What's the one subject your kid fights you on? (Math parents, I see you)",
+            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
           },
           "x": {
-            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "What's the one subject your kid fights you on? (Math parents, I see you)\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "facebook": {
-            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo #webgame"
+            "text": "What's the one subject your kid fights you on? (Math parents, I see you)\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
           },
           "bluesky": {
-            "text": "My tower fell and I felt that physically\n\nNo download, no signup. Just stack → stackadoo.com\n\n#stackadoo"
+            "text": "What's the one subject your kid fights you on? (Math parents, I see you)\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
           },
           "reddit": {
-            "title": "My tower fell and I felt that physically",
-            "body": "I'm the solo dev behind Stackadoo, a free browser stacking game — no download, no signup. Today's post: My tower fell and I felt that physically\n\nPlay here: https://stackadoo.com\n\nWould genuinely love feedback (be brutal).",
+            "title": "What's the one subject your kid fights you on? (Math parents, I see you)",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
             "communities": [
-              "r/WebGames",
-              "r/playmygame",
-              "r/IndieGaming"
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
             ],
             "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
           }
