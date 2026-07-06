@@ -31,6 +31,7 @@ const HELP = `
               --wait S        seconds to wait after load (default 3)
               --full-page     make the first screenshot full-page
   export    write the queue as CSV (content/queue-export.csv)
+  app       open the point-and-click dashboard in your browser (npm start)
   help      this text
 
 daily flow:  npm run due  →  npm run capture -- --record 20  →  npm run pack
@@ -129,6 +130,11 @@ try {
     case 'export': {
       const { exportCsv } = await import('../src/pack.js');
       console.log(`📄 wrote ${path.relative(ROOT, exportCsv(config))}`);
+      break;
+    }
+    case 'app': {
+      const { startApp } = await import('../src/server.js');
+      startApp({ open: !values.json });
       break;
     }
     case 'help':

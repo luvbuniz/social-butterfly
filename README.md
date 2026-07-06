@@ -19,7 +19,19 @@ Then open `butterfly.config.json` and make it yours: social handles, hashtags, t
 score range of your real game, and the `series.startDate` (the day you start the
 "posting until someone beats my high score" series).
 
-## The 20-minute daily routine
+## ✨ The dashboard (start here)
+
+```bash
+npm start
+```
+
+Opens a point-and-click app in your browser (http://localhost:4646) with everything
+in one place: today's post + captions with copy buttons and share links, the
+capture studio (film the game with buttons, browse the gallery), the weekly queue
+with checkboxes, and a results dashboard (streak, posts, views-by-platform once you
+log numbers). Nothing posts automatically — you're always the one pressing Post.
+
+## The same routine from the terminal (optional)
 
 ```bash
 npm run due                        # 1. what's on today + your streak
@@ -30,6 +42,12 @@ node bin/butterfly.js done <id>    # 5. keep the streak alive
 ```
 
 Weekly: `npm run plan` refills the queue for the next 7 days (Mon–Sun pillar rotation).
+
+## Snippets for the game site itself
+
+`site-snippets/` has two copy-paste upgrades for stackadoo.com — link-preview
+(Open Graph) tags and a "Share my score" button. They matter more than any amount
+of posting; see `site-snippets/README.md`.
 
 ## Commands
 

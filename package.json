@@ -7,6 +7,7 @@
     "butterfly": "bin/butterfly.js"
   },
   "scripts": {
+    "start": "node bin/butterfly.js app",
     "today": "node bin/butterfly.js ideas",
     "plan": "node bin/butterfly.js plan",
     "due": "node bin/butterfly.js due",

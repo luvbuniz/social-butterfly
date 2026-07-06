@@ -1,0 +1,57 @@
+<!-- ============================================================
+  "Share my score" button for the game-over screen.
+  Mobile: opens the native share sheet (players pick TikTok DMs,
+  iMessage, wherever). Desktop: copies the brag text + shows
+  one-click X/Reddit links.
+  TODO: call stackadooShare(score) with your real score variable,
+  or set data-score on the button before showing it.
+============================================================= -->
+<style>
+  .sd-share { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .sd-share button, .sd-share a {
+    font: 600 16px/1 system-ui, sans-serif; cursor: pointer; text-decoration: none;
+    background: #3987e5; color: #fff; border: 0; border-radius: 10px; padding: 12px 18px;
+  }
+  .sd-share a { background: #26263a; }
+</style>
+
+<div class="sd-share">
+  <button id="sd-share-btn" data-score="0">📣 Share my score</button>
+  <a id="sd-share-x" target="_blank" rel="noopener">X</a>
+  <a id="sd-share-reddit" target="_blank" rel="noopener">Reddit</a>
+</div>
+
+<script>
+(function () {
+  var URL_ = 'https://stackadoo.com?utm_source=player_share'; // shows up in your analytics
+  function brag(score) {
+    return 'I stacked ' + score + ' on Stackadoo 🧱 think you can beat me?';
+  }
+  function wire(score) {
+    var text = brag(score);
+    document.getElementById('sd-share-x').href =
+      'https://x.com/intent/post?text=' + encodeURIComponent(text + '\n' + URL_);
+    document.getElementById('sd-share-reddit').href =
+      'https://www.reddit.com/submit?url=' + encodeURIComponent(URL_) + '&title=' + encodeURIComponent(text);
+  }
+  var btn = document.getElementById('sd-share-btn');
+  btn.addEventListener('click', function () {
+    var score = btn.dataset.score;
+    var text = brag(score);
+    if (navigator.share) {
+      navigator.share({ title: 'Stackadoo', text: text, url: URL_ }).catch(function () {});
+    } else {
+      navigator.clipboard.writeText(text + ' ' + URL_).then(function () {
+        btn.textContent = '✅ copied — paste it anywhere';
+        setTimeout(function () { btn.textContent = '📣 Share my score'; }, 2000);
+      });
+    }
+  });
+  // Call this when a run ends:
+  window.stackadooShare = function (score) {
+    btn.dataset.score = score;
+    wire(score);
+  };
+  wire(0);
+})();
+</script>

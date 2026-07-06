@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🦋 Social Butterfly — Stackadoo</title>
+<style>
+  :root {
+    --surface: #141420;
+    --panel: #1d1d2e;
+    --panel-2: #26263a;
+    --border: #34344c;
+    --text: #ffffff;
+    --text-2: #c3c2d0;
+    --text-3: #8b8aa0;
+    --accent: #3987e5;      /* series-1 dark (validated on dark surface) */
+    --accent-soft: #3987e526;
+    --good: #1baf7a;
+    --radius: 14px;
+    font-size: 15px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface); color: var(--text);
+    font: 400 1rem/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 20px 20px 80px; }
+  header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 10px 0 22px; }
+  header h1 { font-size: 1.5rem; margin: 0; }
+  header .date { color: var(--text-3); }
+  .flame {
+    margin-left: auto; background: var(--panel); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 14px; font-weight: 600;
+  }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px; margin-bottom: 20px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 1.15rem; }
+  .card .sub { color: var(--text-3); margin: 0 0 16px; font-size: .92rem; }
+  .chip {
+    display: inline-block; background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; padding: 2px 11px; font-size: .85rem; font-weight: 600;
+  }
+  .hook { font-size: 1.3rem; font-weight: 700; margin: 10px 0 2px; line-height: 1.3; }
+  .assettip { background: var(--panel-2); border-radius: 10px; padding: 10px 14px; color: var(--text-2); font-size: .92rem; margin: 12px 0; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 10px; }
+  .tabs button {
+    background: var(--panel-2); color: var(--text-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px; cursor: pointer; font: inherit; font-size: .9rem;
+  }
+  .tabs button.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  pre.caption {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px; white-space: pre-wrap; word-break: break-word; margin: 0 0 10px;
+    font: inherit; color: var(--text-2); min-height: 88px;
+  }
+  .btn {
+    background: var(--accent); color: #fff; border: 0; border-radius: 10px;
+    padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .btn.ghost { background: var(--panel-2); color: var(--text-2); border: 1px solid var(--border); }
+  .btn.good { background: var(--good); }
+  .btn:disabled { opacity: .5; cursor: wait; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .sharebar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+  .sharebar a {
+    background: var(--panel-2); border: 1px solid var(--border); color: var(--text-2);
+    text-decoration: none; border-radius: 8px; padding: 6px 12px; font-size: .9rem;
+  }
+  .sharebar a:hover { border-color: var(--accent); color: var(--text); }
+  details.backup { margin-top: 14px; color: var(--text-2); }
+  details.backup summary { cursor: pointer; color: var(--text-3); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 14px; }
+  .shot { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .shot img, .shot video { width: 100%; aspect-ratio: 9/16; object-fit: cover; display: block; background: #000; }
+  .shot.wide img, .shot.wide video { aspect-ratio: 16/9; }
+  .shot .meta { padding: 6px 9px; font-size: .78rem; color: var(--text-3); word-break: break-all; }
+  .field { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--text-3); }
+  select, input[type=number] {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 10px; font: inherit;
+  }
+  ul.queue { list-style: none; margin: 0; padding: 0; }
+  ul.queue li {
+    display: flex; gap: 12px; align-items: center; padding: 9px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  ul.queue li:last-child { border-bottom: 0; }
+  ul.queue input[type=checkbox] { width: 19px; height: 19px; accent-color: var(--good); }
+  ul.queue .qdate { color: var(--text-3); font-size: .88rem; min-width: 88px; }
+  ul.queue .qhook { color: var(--text-2); }
+  ul.queue li.done .qhook { text-decoration: line-through; color: var(--text-3); }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 18px; }
+  .tile { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .tile .n { font-size: 1.7rem; font-weight: 700; }
+  .tile .l { color: var(--text-3); font-size: .85rem; }
+  .bars { display: grid; gap: 8px; margin: 8px 0 16px; }
+  .bar-row { display: grid; grid-template-columns: 92px 1fr 70px; gap: 10px; align-items: center; font-size: .9rem; }
+  .bar-row .name { color: var(--text-2); text-align: right; }
+  .bar-track { display: block; background: var(--panel-2); border-radius: 4px; height: 18px; overflow: hidden; }
+  .bar-fill { display: block; background: var(--accent); border-radius: 0 4px 4px 0; height: 100%; min-width: 2px; }
+  .bar-row .val { color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .loglist { display: grid; gap: 8px; }
+  .loglist .logrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: .9rem; color: var(--text-2); }
+  .loglist input[type=number] { width: 110px; }
+  footer { color: var(--text-3); font-size: .85rem; text-align: center; margin-top: 30px; }
+  footer a { color: var(--text-2); }
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--good); color: #fff; padding: 10px 20px; border-radius: 10px;
+    font-weight: 600; opacity: 0; transition: opacity .25s; pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🦋 Social Butterfly</h1>
+    <span class="date" id="hdr-date"></span>
+    <span class="flame" id="hdr-streak">🔥 —</span>
+  </header>
+
+  <section class="card" id="today-card">
+    <h2>⭐ Today's post</h2>
+    <p class="sub">One idea per day keeps the accounts alive. Copy a caption, grab media below, press Post yourself.</p>
+    <div id="today"></div>
+  </section>
+
+  <section class="card">
+    <h2>📸 Capture studio</h2>
+    <p class="sub">Films the site with a real browser — screenshots and video land in <code>content/captures/</code> and show up here.</p>
+    <div class="row">
+      <label class="field">target
+        <select id="cap-url">
+          <option value="">stackadoo.com (real site)</option>
+          <option value="demo">bundled demo page (offline test)</option>
+        </select>
+      </label>
+      <label class="field">format
+        <select id="cap-preset">
+          <option value="vertical">vertical 9:16 — TikTok / Reels / Shorts</option>
+          <option value="wide">wide 16:9 — X / YouTube</option>
+          <option value="square">square 1:1 — Instagram feed</option>
+        </select>
+      </label>
+      <label class="field">video seconds
+        <input type="number" id="cap-record" value="15" min="0" max="120">
+      </label>
+      <label class="field">screenshots
+        <input type="number" id="cap-shots" value="2" min="0" max="10">
+      </label>
+      <button class="btn" id="cap-go">📸 Capture</button>
+    </div>
+    <div class="grid" id="gallery"></div>
+  </section>
+
+  <section class="card">
+    <h2>🗓 This week</h2>
+    <p class="sub">Mon–Sun pillar rotation. Tick a post when it's live — that feeds your streak.</p>
+    <ul class="queue" id="queue"></ul>
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost" id="plan-btn">＋ Plan next 7 days</button>
+      <button class="btn ghost" id="pack-btn">📦 Build today's post pack</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>📈 Results</h2>
+    <p class="sub">Log views on posts you've made (from each app's own stats screen) and this fills in. Site traffic lives in <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--text-2)">Cloudflare</a> / <a href="https://analytics.google.com" target="_blank" style="color:var(--text-2)">Google Analytics</a>.</p>
+    <div class="tiles" id="tiles"></div>
+    <div id="chart"></div>
+    <div class="loglist" id="loglist"></div>
+  </section>
+
+  <footer>
+    everything runs on your computer — nothing posts automatically ·
+    <a href="https://github.com/luvbuniz/social-butterfly/blob/HEAD/docs/STRATEGY.md" target="_blank">strategy</a> ·
+    <a href="https://github.com/luvbuniz/social-butterfly/blob/HEAD/docs/SAFE_AUTOMATION.md" target="_blank">safe automation</a>
+  </footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let STATE = null;
+let activeTab = 'tiktok';
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+async function api(path, body) {
+  const res = await fetch(path, body ? { method: 'POST', headers: {'content-type':'application/json'}, body: JSON.stringify(body) } : undefined);
+  if (!res.ok) throw new Error((await res.json()).error || res.statusText);
+  return res.json();
+}
+
+async function refresh() {
+  STATE = await api('/api/state');
+  renderHeader(); renderToday(); renderGallery(); renderQueue(); renderResults();
+}
+
+function renderHeader() {
+  $('#hdr-date').textContent = STATE.date;
+  $('#hdr-streak').textContent = `🔥 ${STATE.stats.streak} day streak`;
+}
+
+function captionText(cap) {
+  if (!cap) return '';
+  if (cap.title !== undefined && cap.description !== undefined) return `TITLE: ${cap.title}\n\n${cap.description}`;
+  if (cap.title !== undefined) return `TITLE: ${cap.title}\n\n${cap.body}\n\n(suggested subs: ${cap.communities.join(', ')})`;
+  return cap.text;
+}
+
+function renderToday() {
+  const idea = STATE.ideas[0];
+  const queued = STATE.queue.find((it) => it.id === idea.id);
+  const posted = queued?.status === 'done';
+  const platforms = ['tiktok','instagram','x','youtube','facebook','bluesky','reddit'];
+  const tabs = platforms.map((p) =>
+    `<button class="${p===activeTab?'on':''}" data-tab="${p}">${p}${idea.platforms.includes(p)?' ✦':''}</button>`).join('');
+  const links = Object.entries(idea.links).map(([k,v]) => `<a href="${esc(v)}" target="_blank">${k} ↗</a>`).join('');
+  const backups = STATE.ideas.slice(1).map((b) =>
+    `<div style="margin:8px 0"><span class="chip">${esc(b.pillarLabel)}</span> ${esc(b.hook)}</div>`).join('');
+
+  $('#today').innerHTML = `
+    <span class="chip">${esc(idea.pillarLabel)}</span>
+    <div class="hook">${esc(idea.hook)}</div>
+    <div style="color:var(--text-3);font-size:.9rem">best on: ${idea.platforms.join(' · ')} (✦ in tabs)</div>
+    <div class="assettip">🎥 ${esc(idea.asset)}</div>
+    <div class="tabs" id="cap-tabs">${tabs}</div>
+    <pre class="caption" id="caption">${esc(captionText(idea.captions[activeTab]))}</pre>
+    <div class="row">
+      <button class="btn" id="copy-btn">📋 Copy ${esc(activeTab)} caption</button>
+      <button class="btn ${posted ? 'ghost' : 'good'}" id="posted-btn">${posted ? '✓ posted today' : '✅ Mark as posted'}</button>
+    </div>
+    <div class="sharebar">${links}</div>
+    <div style="color:var(--text-3);font-size:.85rem">share buttons open a prefilled compose window — you press Post. TikTok/IG/YouTube: upload media there and paste the caption.</div>
+    <details class="backup"><summary>backup ideas for today</summary>${backups}</details>`;
+
+  $('#cap-tabs').onclick = (e) => {
+    const b = e.target.closest('button[data-tab]');
+    if (!b) return;
+    activeTab = b.dataset.tab;
+    renderToday();
+  };
+  $('#copy-btn').onclick = async () => {
+    await navigator.clipboard.writeText(captionText(idea.captions[activeTab]));
+    toast('caption copied — paste it in the app');
+  };
+  $('#posted-btn').onclick = async () => {
+    if (!queued) await api('/api/plan', { days: 1 });
+    await api('/api/done', { id: idea.id, undo: posted });
+    await refresh();
+    if (!posted) toast('nice. streak +1 🔥');
+  };
+}
+
+function renderGallery() {
+  $('#gallery').innerHTML = STATE.captures.map((c) => {
+    const src = `/media/captures/${encodeURIComponent(c.name)}`;
+    const media = c.video
+      ? `<video src="${src}" controls muted loop></video>`
+      : `<a href="${src}" target="_blank"><img src="${src}" loading="lazy" alt="${esc(c.name)}"></a>`;
+    const wide = c.name.includes('-wide') ? ' wide' : '';
+    return `<div class="shot${wide}">${media}<div class="meta">${esc(c.name)} · ${(c.size/1024/1024).toFixed(1)}MB</div></div>`;
+  }).join('') || '<div style="color:var(--text-3)">no captures yet — hit 📸 Capture above</div>';
+}
+
+function renderQueue() {
+  $('#queue').innerHTML = STATE.queue.map((it) => `
+    <li class="${it.status==='done'?'done':''}">
+      <input type="checkbox" data-id="${esc(it.id)}" ${it.status==='done'?'checked':''}>
+      <span class="qdate">${it.date}</span>
+      <span class="chip">${esc(it.pillarLabel)}</span>
+      <span class="qhook">${esc(it.hook)}</span>
+    </li>`).join('') || '<li style="color:var(--text-3);border:0">queue is empty — plan a week below</li>';
+  $('#queue').onchange = async (e) => {
+    const cb = e.target.closest('input[data-id]');
+    if (!cb) return;
+    await api('/api/done', { id: cb.dataset.id, undo: !cb.checked });
+    await refresh();
+  };
+}
+
+function renderResults() {
+  const s = STATE.stats;
+  const platforms = Object.entries(s.byPlatform).filter(([,v]) => v.views > 0).sort((a,b) => b[1].views - a[1].views);
+  const best = platforms[0]?.[0] ?? '—';
+  $('#tiles').innerHTML = `
+    <div class="tile"><div class="n">${s.streak}🔥</div><div class="l">day streak</div></div>
+    <div class="tile"><div class="n">${s.postedThisWeek}</div><div class="l">posts this week</div></div>
+    <div class="tile"><div class="n">${s.totalPosted}</div><div class="l">posts all time</div></div>
+    <div class="tile"><div class="n">${esc(best)}</div><div class="l">best platform (views)</div></div>`;
+
+  const max = Math.max(1, ...platforms.map(([,v]) => v.views));
+  $('#chart').innerHTML = platforms.length ? `
+    <div style="color:var(--text-3);font-size:.85rem;margin-bottom:6px">views by platform (your logged numbers)</div>
+    <div class="bars">${platforms.map(([p,v]) => `
+      <div class="bar-row">
+        <span class="name">${esc(p)}</span>
+        <span class="bar-track"><span class="bar-fill" style="width:${(v.views/max*100).toFixed(1)}%"></span></span>
+        <span class="val">${v.views.toLocaleString()}</span>
+      </div>`).join('')}</div>` : '';
+
+  $('#loglist').innerHTML = s.recentDone.length
+    ? '<div style="color:var(--text-3);font-size:.85rem">log views for recent posts:</div>' +
+      s.recentDone.map((it) => `
+      <div class="logrow" data-id="${esc(it.id)}">
+        <span style="min-width:88px;color:var(--text-3)">${it.date}</span>
+        <span>${esc(it.hook.slice(0, 44))}${it.hook.length > 44 ? '…' : ''}</span>
+        <select class="log-platform">${it.platforms.map((p)=>`<option>${esc(p)}</option>`).join('')}</select>
+        <input type="number" class="log-views" placeholder="views" min="0">
+        <button class="btn ghost log-save">save</button>
+      </div>`).join('')
+    : '<div style="color:var(--text-3)">mark a post as posted and it shows up here for logging</div>';
+
+  $('#loglist').onclick = async (e) => {
+    const btn = e.target.closest('.log-save');
+    if (!btn) return;
+    const row = btn.closest('.logrow');
+    await api('/api/results', {
+      id: row.dataset.id,
+      platform: row.querySelector('.log-platform').value,
+      views: row.querySelector('.log-views').value,
+    });
+    toast('logged 📈');
+    await refresh();
+  };
+}
+
+$('#cap-go').onclick = async () => {
+  const btn = $('#cap-go');
+  btn.disabled = true; btn.textContent = '🎬 filming… (leave this open)';
+  try {
+    const r = await api('/api/capture', {
+      url: $('#cap-url').value,
+      preset: $('#cap-preset').value,
+      record: Number($('#cap-record').value),
+      shots: Number($('#cap-shots').value),
+    });
+    toast(`${r.files.length} file(s) captured`);
+    await refresh();
+  } catch (err) {
+    toast('capture failed: ' + err.message);
+  } finally {
+    btn.disabled = false; btn.textContent = '📸 Capture';
+  }
+};
+
+$('#plan-btn').onclick = async () => { await api('/api/plan', { days: 7 }); toast('week planned 🗓'); await refresh(); };
+$('#pack-btn').onclick = async () => { const r = await api('/api/pack', {}); toast('pack ready: ' + r.dir); };
+
+refresh().catch((e) => { document.body.innerHTML = '<pre style="color:#e66767;padding:30px">' + esc(e.message) + '</pre>'; });
+</script>
+</body>
+</html>

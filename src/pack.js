@@ -14,6 +14,10 @@ export function shareLinks(config, idea) {
   const url = config.site.url;
   const short = config.site.shortUrl ?? url;
   const hasLink = (t) => t.includes(url) || t.includes(short);
+  // utm tags let Cloudflare/GA4 attribute visitors to the exact platform.
+  // Applied only where the URL is a link target (not visible post text).
+  const tagged = (platform) =>
+    config.tracking?.utm === false ? url : `${url}?utm_source=${platform}&utm_medium=social`;
   const x = idea.captions.x?.text ?? idea.hook;
   const bsky = idea.captions.bluesky?.text ?? idea.hook;
   const reddit = idea.captions.reddit;
@@ -21,11 +25,11 @@ export function shareLinks(config, idea) {
     x: `https://x.com/intent/post?text=${enc(hasLink(x) ? x : `${x}\n${url}`)}`,
     bluesky: `https://bsky.app/intent/compose?text=${enc(hasLink(bsky) ? bsky : `${bsky}\n${url}`)}`,
     threads: `https://www.threads.net/intent/post?text=${enc(`${idea.hook}\n${url}`)}`,
-    reddit: `https://www.reddit.com/submit?url=${enc(url)}&title=${enc(reddit.title)}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}&quote=${enc(idea.hook)}`,
-    telegram: `https://t.me/share/url?url=${enc(url)}&text=${enc(idea.hook)}`,
+    reddit: `https://www.reddit.com/submit?url=${enc(tagged('reddit'))}&title=${enc(reddit.title)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(tagged('facebook'))}&quote=${enc(idea.hook)}`,
+    telegram: `https://t.me/share/url?url=${enc(tagged('telegram'))}&text=${enc(idea.hook)}`,
     whatsapp: `https://wa.me/?text=${enc(`${idea.hook}\n${url}`)}`,
-    pinterest: `https://www.pinterest.com/pin/create/button/?url=${enc(url)}&description=${enc(idea.hook)}`,
+    pinterest: `https://www.pinterest.com/pin/create/button/?url=${enc(tagged('pinterest'))}&description=${enc(idea.hook)}`,
   };
 }
 
