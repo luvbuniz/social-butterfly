@@ -30,6 +30,8 @@ const HELP = `
               --scroll        auto-scroll the page while capturing
               --wait S        seconds to wait after load (default 3)
               --full-page     make the first screenshot full-page
+              --auto          press Play, type a username, answer math questions
+                              (scripted steps: capture.steps in butterfly.config.json)
   export    write the queue as CSV (content/queue-export.csv)
   app       open the point-and-click dashboard in your browser (npm start)
   help      this text
@@ -53,6 +55,7 @@ const opts = {
   record: { type: 'string' },
   wait: { type: 'string' },
   scroll: { type: 'boolean' },
+  auto: { type: 'boolean' },
   'full-page': { type: 'boolean' },
   full: { type: 'boolean' },
   json: { type: 'boolean' },
@@ -124,6 +127,9 @@ try {
         wait: Number(values.wait ?? 3),
         fullPage: Boolean(values['full-page']),
         outDir: config.capture?.outDir,
+        auto: Boolean(values.auto),
+        steps: config.capture?.steps ?? [],
+        username: config.capture?.username ?? 'Butterfly',
       });
       break;
     }

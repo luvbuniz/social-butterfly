@@ -25,7 +25,87 @@ async function launchChromium() {
 }
 
 /**
- * Load the site, optionally auto-scroll, and capture screenshots + video.
+ * Scripted steps from butterfly.config.json → capture.steps, e.g.:
+ *   { "action": "click",  "selector": "text=Play" }
+ *   { "action": "fill",   "selector": "#username", "value": "Butterfly" }
+ *   { "action": "press",  "key": "Enter" }
+ *   { "action": "scroll", "selector": "#play" }   // or { "y": 600 }
+ *   { "action": "wait",   "seconds": 2 }
+ */
+async function runSteps(page, steps) {
+  for (const s of steps) {
+    try {
+      if (s.action === 'click') await page.click(s.selector, { timeout: 5000 });
+      else if (s.action === 'fill') await page.fill(s.selector, s.value ?? '', { timeout: 5000 });
+      else if (s.action === 'press') await page.keyboard.press(s.key ?? 'Enter');
+      else if (s.action === 'scroll' && s.selector)
+        await page.locator(s.selector).first().scrollIntoViewIfNeeded({ timeout: 5000 });
+      else if (s.action === 'scroll') await page.evaluate((y) => window.scrollBy(0, y), s.y ?? 600);
+      else if (s.action === 'wait') await page.waitForTimeout((s.seconds ?? 1) * 1000);
+      console.log(`  ✓ step: ${s.action} ${s.selector ?? s.key ?? s.y ?? ''}`);
+    } catch {
+      console.log(`  ⚠ step skipped (not found): ${s.action} ${s.selector ?? ''}`);
+    }
+  }
+}
+
+/** Best-effort "press Play, type a name, start" for unscripted sites. */
+async function autoStart(page, username) {
+  const clickByText = async (re) => {
+    const btn = page
+      .locator('button, [role="button"], a, input[type="submit"]')
+      .filter({ hasText: re })
+      .first();
+    await btn.scrollIntoViewIfNeeded({ timeout: 3000 });
+    await btn.click({ timeout: 3000 });
+    return true;
+  };
+  try { await clickByText(/play|start/i); console.log('  ✓ auto: clicked Play'); } catch {}
+  await page.waitForTimeout(1200);
+  try {
+    const input = page
+      .locator('input[type="text"], input:not([type]), input[placeholder*="name" i], input[name*="name" i], input[id*="name" i]')
+      .first();
+    await input.fill(username, { timeout: 3000 });
+    console.log(`  ✓ auto: typed username "${username}"`);
+    try { await clickByText(/start|go|continue|play|submit|✓/i); } catch { await page.keyboard.press('Enter'); }
+  } catch {}
+  await page.waitForTimeout(800);
+}
+
+/**
+ * While filming, keep solving on-screen arithmetic ("32 − 7 = ?") by clicking
+ * the button whose label equals the answer. Best-effort; harmless if no match.
+ */
+function startMathSolver(page) {
+  let stopped = false;
+  (async () => {
+    while (!stopped) {
+      try {
+        const solved = await page.evaluate(() => {
+          const m = document.body.innerText.match(/(\d+)\s*([+\-−×x*÷/])\s*(\d+)\s*=/);
+          if (!m) return false;
+          const a = +m[1], b = +m[3], op = m[2];
+          const ans =
+            op === '+' ? a + b :
+            op === '−' || op === '-' ? a - b :
+            op === '÷' || op === '/' ? a / b : a * b;
+          const clickable = [...document.querySelectorAll('button, [role="button"], a, label')];
+          const el = clickable.find((e) => e.innerText.trim() === String(ans) && e.offsetParent !== null);
+          if (el) { el.click(); return true; }
+          return false;
+        });
+        if (solved) console.log('  ✓ auto: answered a math question');
+      } catch {}
+      await page.waitForTimeout(1300).catch(() => { stopped = true; });
+    }
+  })();
+  return () => { stopped = true; };
+}
+
+/**
+ * Load the site, optionally interact (scripted steps and/or auto-play),
+ * and capture screenshots + video.
  * This automates YOUR browser looking at YOUR site — no platform ToS in play.
  */
 export async function capture({
@@ -39,6 +119,9 @@ export async function capture({
   wait = 3,
   fullPage = false,
   outDir,
+  auto = false,
+  steps = [],
+  username = 'Butterfly',
 } = {}) {
   const size = PRESETS[preset] ?? PRESETS.vertical;
   const dir = path.resolve(ROOT, outDir ?? 'content/captures');
@@ -59,6 +142,14 @@ export async function capture({
   console.log(`→ loading ${url} at ${size.width}x${size.height} (${preset})`);
   await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForTimeout(wait * 1000);
+
+  let stopSolver = null;
+  if (steps.length) await runSteps(page, steps);
+  if (auto) {
+    await autoStart(page, username);
+    stopSolver = startMathSolver(page);
+    await page.waitForTimeout(2000); // let gameplay begin before the first shot
+  }
 
   if (scroll) {
     // Fire-and-forget smooth scroll to the bottom and back, looping.
@@ -91,6 +182,7 @@ export async function capture({
     await page.waitForTimeout(Math.min(every * 1000, Math.max(remaining, 250)));
   }
 
+  if (stopSolver) stopSolver();
   await context.close(); // flushes the video file
   await browser.close();
 

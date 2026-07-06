@@ -69,10 +69,18 @@ screenshots + video sized for social:
 
 ```bash
 npm run capture -- --record 25                   # 25s vertical video + 3 screenshots
+npm run capture -- --auto --record 20            # 🎮 press Play, type a name, answer questions — on camera
 npm run capture -- --preset wide --shots 3       # 16:9 screenshots for X/dev-logs
 npm run capture -- --scroll --record 15          # auto-scroll the page while recording
 npm run capture -- --url https://stackadoo.com/leaderboard --shots 1
 ```
+
+**Auto-play** (`--auto`, or the dropdown in the dashboard) makes the browser act
+like a player before/while filming: it clicks a Play/Start button, types
+`capture.username` into a name field if one appears, then keeps solving any
+visible "32 − 7 = ?" style question by clicking the right answer. If your site's
+flow needs exact clicks instead of guessing, script them in `capture.steps` in
+`butterfly.config.json` (click / fill / press / scroll / wait — see src/capture.js).
 
 Presets: `vertical` 1080×1920 (TikTok/Shorts/Reels) · `wide` 1920×1080 · `square` 1080×1080.
 Output lands in `content/captures/`. Videos are `.webm` (fine for YouTube/X); the tool

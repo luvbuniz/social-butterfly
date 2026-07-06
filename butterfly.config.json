@@ -10,7 +10,10 @@
     "startDate": "2026-07-06",
     "label": "posting my game until someone beats my high score"
   },
-  "scoreRange": [42, 187],
+  "scoreRange": [
+    42,
+    187
+  ],
   "socials": {
     "tiktok": "@stackadoo",
     "instagram": "@stackadoo",
@@ -22,19 +25,59 @@
     "discord": ""
   },
   "hashtags": {
-    "core": ["#stackadoo", "#webgame", "#indiegame"],
-    "tiktok": ["#gaming", "#gamertok", "#browsergame", "#indiedev", "#satisfying", "#fyp"],
-    "instagram": ["#gamer", "#indiegames", "#casualgames", "#browsergames", "#gamedev", "#gamersofinstagram"],
-    "youtube": ["#shorts", "#gaming", "#indiegame"],
-    "x": ["#indiegame"],
-    "facebook": ["#indiegame"],
+    "core": [
+      "#stackadoo",
+      "#webgame",
+      "#indiegame"
+    ],
+    "tiktok": [
+      "#gaming",
+      "#gamertok",
+      "#browsergame",
+      "#indiedev",
+      "#satisfying",
+      "#fyp"
+    ],
+    "instagram": [
+      "#gamer",
+      "#indiegames",
+      "#casualgames",
+      "#browsergames",
+      "#gamedev",
+      "#gamersofinstagram"
+    ],
+    "youtube": [
+      "#shorts",
+      "#gaming",
+      "#indiegame"
+    ],
+    "x": [
+      "#indiegame"
+    ],
+    "facebook": [
+      "#indiegame"
+    ],
     "bluesky": []
   },
-  "rotation": ["clip", "challenge", "tip", "devlog", "cartoon", "meme", "community"],
-  "redditCommunities": ["r/WebGames", "r/playmygame", "r/IndieGaming"],
+  "rotation": [
+    "clip",
+    "challenge",
+    "tip",
+    "devlog",
+    "cartoon",
+    "meme",
+    "community"
+  ],
+  "redditCommunities": [
+    "r/WebGames",
+    "r/playmygame",
+    "r/IndieGaming"
+  ],
   "capture": {
     "defaultPreset": "vertical",
-    "outDir": "content/captures"
+    "outDir": "content/captures",
+    "username": "Butterfly",
+    "steps": []
   },
   "claude": {
     "model": "claude-opus-4-8"

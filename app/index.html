@@ -151,6 +151,12 @@
       <label class="field">screenshots
         <input type="number" id="cap-shots" value="2" min="0" max="10">
       </label>
+      <label class="field">auto-play
+        <select id="cap-auto">
+          <option value="">off — film the page as-is</option>
+          <option value="1" selected>🎮 press Play, type name, answer questions</option>
+        </select>
+      </label>
       <button class="btn" id="cap-go">📸 Capture</button>
     </div>
     <div class="grid" id="gallery"></div>
@@ -345,6 +351,7 @@ $('#cap-go').onclick = async () => {
       preset: $('#cap-preset').value,
       record: Number($('#cap-record').value),
       shots: Number($('#cap-shots').value),
+      auto: Boolean($('#cap-auto').value),
     });
     toast(`${r.files.length} file(s) captured`);
     await refresh();

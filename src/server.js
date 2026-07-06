@@ -160,6 +160,9 @@ export function createServer() {
           scroll: Boolean(body.scroll),
           wait: Number(body.wait ?? 3),
           outDir: config.capture?.outDir,
+          auto: Boolean(body.auto),
+          steps: config.capture?.steps ?? [],
+          username: config.capture?.username ?? 'Butterfly',
         });
         json(res, 200, { ok: true, files: saved.map((f) => path.basename(f)) });
         return;

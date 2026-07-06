@@ -13,14 +13,58 @@
     text-shadow: 0 4px 24px rgba(0,0,0,.5);
   }
   #hud small { display: block; font-size: 3vmin; font-weight: 500; opacity: .7; margin-top: 1vmin; }
+  .overlay {
+    position: fixed; inset: 0; display: flex; flex-direction: column; gap: 3vmin;
+    align-items: center; justify-content: center; text-align: center;
+    background: rgba(18,18,43,.86); color: #fff; font-family: system-ui, sans-serif;
+  }
+  .overlay h1 { font-size: 11vmin; margin: 0; }
+  .overlay p { margin: 0; opacity: .75; font-size: 3.4vmin; }
+  .overlay button {
+    font: 700 4.5vmin/1 system-ui, sans-serif; color: #fff; background: #3987e5;
+    border: 0; border-radius: 2vmin; padding: 3vmin 8vmin; cursor: pointer;
+  }
+  .overlay input {
+    font: 600 4vmin/1 system-ui, sans-serif; padding: 2.5vmin 3vmin; border-radius: 2vmin;
+    border: 0; text-align: center; width: 60vmin; max-width: 80vw;
+  }
+  #question {
+    position: fixed; top: 22vh; left: 50%; transform: translateX(-50%);
+    background: #fff; color: #12122b; border-radius: 3vmin; padding: 3vmin 5vmin;
+    font: 700 6vmin/1.2 system-ui, sans-serif; text-align: center; display: none;
+    box-shadow: 0 8px 40px rgba(0,0,0,.45);
+  }
+  #question .opts { display: flex; gap: 3vmin; justify-content: center; margin-top: 2.5vmin; }
+  #question button {
+    font: 700 5.5vmin/1 system-ui, sans-serif; background: #edeef5; color: #12122b;
+    border: 0; border-radius: 2vmin; padding: 2vmin 5vmin; cursor: pointer;
+  }
+  #player {
+    position: fixed; bottom: 3vh; left: 0; right: 0; text-align: center;
+    color: #fff; opacity: .8; font: 600 3.2vmin/1 system-ui, sans-serif; display: none;
+  }
 </style>
 </head>
 <body>
-<div id="hud">0<small>stackadoo demo stand-in — capture test page</small></div>
+<div id="hud" style="display:none">0<small>stackadoo demo stand-in — capture test page</small></div>
 <canvas id="c"></canvas>
+
+<!-- Mimics the real site's flow so `capture --auto` can be tested offline:
+     landing → Play → username → math questions → blocks stack up. -->
+<div class="overlay" id="landing">
+  <h1>🧱 Stackadoo</h1>
+  <p>demo stand-in — build worlds, solve math</p>
+  <button id="play-btn">▶ Play</button>
+</div>
+<div class="overlay" id="namescreen" style="display:none">
+  <p>What's your name?</p>
+  <input id="username" type="text" placeholder="your name" autocomplete="off">
+  <button id="start-btn">Start</button>
+</div>
+<div id="question"><span id="q-text"></span><div class="opts"><button></button><button></button></div></div>
+<div id="player"></div>
+
 <script>
-// A self-playing stacking animation so `butterfly capture` has something
-// moving to film when you can't reach the real site. Not the actual game.
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 const hud = document.querySelector('#hud');
@@ -32,7 +76,7 @@ function resize() {
 addEventListener('resize', resize); resize();
 
 const unit = () => Math.min(W, H);
-let blocks, score, mover, camY;
+let blocks, score, mover, camY, playing = false;
 function reset() {
   const w = unit() * 0.45, h = unit() * 0.055;
   blocks = [{ x: (W - w) / 2, y: H * 0.85, w, h, hue: 200 }];
@@ -50,10 +94,8 @@ function newMover() {
 function drop() {
   const top = blocks[blocks.length - 1];
   const overlap = Math.min(mover.x + mover.w, top.x + top.w) - Math.max(mover.x, top.x);
-  if (overlap <= 0) { reset(); return; }
-  const jitter = Math.random() < 0.75; // stay imperfect: it looks more human
-  const nx = jitter ? Math.max(mover.x, top.x) : top.x;
-  const nw = jitter ? overlap : top.w;
+  const nx = overlap > 0 ? Math.max(mover.x, top.x) : top.x;
+  const nw = overlap > 0 ? overlap : top.w;
   blocks.push({ x: nx, y: mover.y, w: Math.max(nw, unit() * 0.12), h: mover.h, hue: mover.hue });
   score++;
   hud.firstChild.textContent = score;
@@ -61,22 +103,61 @@ function drop() {
 }
 reset();
 
-let last = 0, sinceDrop = 0;
+// --- landing → name → play flow ---
+document.getElementById('play-btn').onclick = () => {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('namescreen').style.display = 'flex';
+  document.getElementById('username').focus();
+};
+function begin() {
+  const name = document.getElementById('username').value.trim() || 'player';
+  document.getElementById('namescreen').style.display = 'none';
+  hud.style.display = '';
+  const tag = document.getElementById('player');
+  tag.textContent = '👤 ' + name;
+  tag.style.display = '';
+  playing = true;
+  setTimeout(askQuestion, 1500);
+}
+document.getElementById('start-btn').onclick = begin;
+document.getElementById('username').addEventListener('keydown', (e) => { if (e.key === 'Enter') begin(); });
+
+// --- math questions gate the blocks (like the real game) ---
+const qBox = document.getElementById('question');
+const [optA, optB] = qBox.querySelectorAll('.opts button');
+function askQuestion() {
+  if (!playing) return;
+  const a = 10 + Math.floor(Math.random() * 40);
+  const b = 2 + Math.floor(Math.random() * 9);
+  const plus = Math.random() < 0.5;
+  const ans = plus ? a + b : a - b;
+  document.getElementById('q-text').textContent = `${a} ${plus ? '+' : '−'} ${b} = ?`;
+  const wrong = ans + (Math.random() < 0.5 ? 1 : -1);
+  const answerFirst = Math.random() < 0.5;
+  optA.textContent = answerFirst ? ans : wrong;
+  optB.textContent = answerFirst ? wrong : ans;
+  optA.onclick = () => answer(Number(optA.textContent) === ans);
+  optB.onclick = () => answer(Number(optB.textContent) === ans);
+  qBox.style.display = 'block';
+}
+function answer(correct) {
+  qBox.style.display = 'none';
+  if (correct) { drop(); setTimeout(drop, 350); }
+  setTimeout(askQuestion, 2500);
+}
+
+// --- render loop ---
+let last = 0;
 function frame(t) {
   const dt = Math.min(t - last, 50); last = t;
-  sinceDrop += dt;
 
-  mover.x += mover.dir * mover.speed * dt * 0.06 * unit() * 0.01;
-  const margin = W * 0.06;
-  if (mover.x < margin) { mover.x = margin; mover.dir = 1; }
-  if (mover.x + mover.w > W - margin) { mover.x = W - margin - mover.w; mover.dir = -1; }
+  if (playing) {
+    mover.x += mover.dir * mover.speed * dt * 0.06 * unit() * 0.01;
+    const margin = W * 0.06;
+    if (mover.x < margin) { mover.x = margin; mover.dir = 1; }
+    if (mover.x + mover.w > W - margin) { mover.x = W - margin - mover.w; mover.dir = -1; }
+  }
 
-  // auto-drop when roughly aligned, or on a timer
-  const top = blocks[blocks.length - 1];
-  const aligned = Math.abs(mover.x - top.x) < mover.w * 0.18;
-  if ((aligned && sinceDrop > 450) || sinceDrop > 1600) { drop(); sinceDrop = 0; }
-
-  // camera follows the tower up
   const targetCam = Math.max(0, H * 0.85 - blocks[blocks.length - 1].y);
   camY += (targetCam - camY) * 0.06;
 
@@ -92,8 +173,10 @@ function frame(t) {
     ctx.fillStyle = 'rgba(255,255,255,.16)';
     ctx.fillRect(b.x, b.y, b.w, b.h * 0.28);
   }
-  ctx.fillStyle = `hsl(${mover.hue} 85% 66%)`;
-  ctx.fillRect(mover.x, mover.y, mover.w, mover.h);
+  if (playing) {
+    ctx.fillStyle = `hsl(${mover.hue} 85% 66%)`;
+    ctx.fillRect(mover.x, mover.y, mover.w, mover.h);
+  }
   ctx.restore();
 
   requestAnimationFrame(frame);
