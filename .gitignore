@@ -6,3 +6,4 @@ content/inbox/*
 content/queue-export.csv
 .DS_Store
 *.log
+butterfly.secrets.json

@@ -54,7 +54,14 @@
 <div class="overlay" id="landing">
   <h1>🧱 Stackadoo</h1>
   <p>demo stand-in — build worlds, solve math</p>
+  <button id="signin-btn" style="background:#26263a">Sign in</button>
   <button id="play-btn">▶ Play</button>
+</div>
+<div class="overlay" id="loginscreen" style="display:none">
+  <p>Sign in</p>
+  <input id="email" type="email" placeholder="email" autocomplete="username">
+  <input id="password" type="password" placeholder="password" autocomplete="current-password">
+  <button id="login-btn">Log in</button>
 </div>
 <div class="overlay" id="namescreen" style="display:none">
   <p>What's your name?</p>
@@ -108,6 +115,16 @@ document.getElementById('play-btn').onclick = () => {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('namescreen').style.display = 'flex';
   document.getElementById('username').focus();
+};
+document.getElementById('signin-btn').onclick = () => {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('loginscreen').style.display = 'flex';
+};
+document.getElementById('password').addEventListener('keydown', (e) => { if (e.key === 'Enter') document.getElementById('login-btn').click(); });
+document.getElementById('login-btn').onclick = () => {
+  document.getElementById('loginscreen').style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+  document.getElementById('signin-btn').textContent = '✓ signed in';
 };
 function begin() {
   const name = document.getElementById('username').value.trim() || 'player';

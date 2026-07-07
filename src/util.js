@@ -96,3 +96,14 @@ export function timestampSlug(d = new Date()) {
     `-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`
   );
 }
+
+// --- local secrets (butterfly.secrets.json is gitignored — never committed) ---
+
+export function readSecrets() {
+  return loadJson('butterfly.secrets.json', {});
+}
+
+export function writeSecrets(patch) {
+  const cur = readSecrets();
+  saveJson('butterfly.secrets.json', { ...cur, ...patch });
+}

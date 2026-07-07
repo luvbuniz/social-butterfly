@@ -21,6 +21,17 @@ score range of your real game, and the `series.startDate` (the day you start the
 
 ## ✨ The dashboard (start here)
 
+**Easiest way: double-click `StartButterfly.bat`** (in this folder). It installs
+anything missing, starts the app, and opens your browser at
+**http://localhost:4646**. Right-click the .bat → *Send to → Desktop (create
+shortcut)* for a desktop icon.
+
+**On your phone (same wifi):** the terminal window and the dashboard footer show
+a `http://192.168.x.x:4646` address — open it in the phone browser and use
+*Add to Home Screen* to get an app icon.
+
+Or from a terminal:
+
 ```bash
 npm start
 ```
@@ -92,12 +103,18 @@ npm run capture -- --scroll --record 15          # auto-scroll the page while re
 npm run capture -- --url https://stackadoo.com/leaderboard --shots 1
 ```
 
-**Auto-play** (`--auto`, or the dropdown in the dashboard) makes the browser act
-like a player before/while filming: it clicks a Play/Start button, types
-`capture.username` into a name field if one appears, then keeps solving any
-visible "32 − 7 = ?" style question by clicking the right answer. If your site's
-flow needs exact clicks instead of guessing, script them in `capture.steps` in
-`butterfly.config.json` (click / fill / press / scroll / wait — see src/capture.js).
+**Auto-play** (`--auto`, or the mode dropdown in the dashboard) makes the browser
+act like a player: it signs in (if you've saved a test account in the dashboard's
+"sign-in for capture" box — stored in a git-ignored file on this computer only),
+prefers a Free Play / Math Meadow entrance, makes up a kid-safe username
+(PixelMeadow38-style, never a real name), then keeps solving any visible
+"32 − 7 = ?" question by clicking the right answer.
+
+**Smart recording:** in auto mode the clip window doesn't start at page load — it
+starts at the first solved question, and the saved video is trimmed so menus and
+login never appear in the clip. If the site's flow needs exact clicks instead of
+guessing, script them in `capture.steps` in `butterfly.config.json`
+(click / fill / press / scroll / wait — see src/capture.js).
 
 Presets: `vertical` 1080×1920 (TikTok/Shorts/Reels) · `wide` 1920×1080 · `square` 1080×1080.
 Output lands in `content/captures/`. Videos are `.webm` (fine for YouTube/X); the tool

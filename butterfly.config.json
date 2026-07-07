@@ -79,7 +79,7 @@
   "capture": {
     "defaultPreset": "vertical",
     "outDir": "content/captures",
-    "username": "Butterfly",
+    "username": "",
     "steps": []
   },
   "claude": {

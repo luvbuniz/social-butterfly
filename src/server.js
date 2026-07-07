@@ -2,7 +2,8 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
-import { ROOT, loadConfig, todayStr, addDays } from './util.js';
+import os from 'node:os';
+import { ROOT, loadConfig, todayStr, addDays, readSecrets, writeSecrets } from './util.js';
 import { generateIdeas } from './ideas.js';
 import { loadQueue, saveQueue, buildPlan, markDone, streak } from './plan.js';
 import { buildPack, shareLinks } from './pack.js';
@@ -69,6 +70,15 @@ function stats(queue, today) {
   };
 }
 
+export function lanUrl(port = Number(process.env.PORT) || 4646) {
+  for (const addrs of Object.values(os.networkInterfaces())) {
+    for (const a of addrs ?? []) {
+      if (a.family === 'IPv4' && !a.internal) return `http://${a.address}:${port}`;
+    }
+  }
+  return null;
+}
+
 export function createServer() {
   return http.createServer(async (req, res) => {
     const config = loadConfig();
@@ -91,6 +101,8 @@ export function createServer() {
           queue: queue.items,
           media: listMedia(config),
           ffmpeg: (() => { const f = findFfmpeg(); return { found: Boolean(f), full: Boolean(f?.full) }; })(),
+          login: { saved: Boolean(readSecrets().login?.email), email: readSecrets().login?.email ?? '' },
+          lanUrl: lanUrl(),
           stats: stats(queue, todayStr()),
         });
         return;
@@ -156,7 +168,8 @@ export function createServer() {
           auto: Boolean(body.auto),
           headed: Boolean(body.headed),
           steps: config.capture?.steps ?? [],
-          username: config.capture?.username ?? 'Butterfly',
+          username: config.capture?.username ?? '',
+          login: readSecrets().login ?? null,
         });
         json(res, 200, { ok: true, files: saved.map((f) => path.basename(f)) });
         return;
@@ -170,6 +183,39 @@ export function createServer() {
         catch { return json(res, 404, { error: 'not found' }); }
         res.writeHead(200, { 'content-type': MIME[path.extname(file).toLowerCase()] ?? 'application/octet-stream' });
         fs.createReadStream(file).pipe(res);
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/login') {
+        const { email, password } = await readBody(req);
+        if (!email || !password) {
+          writeSecrets({ login: null });
+          json(res, 200, { ok: true, saved: false });
+          return;
+        }
+        writeSecrets({ login: { email, password } });
+        json(res, 200, { ok: true, saved: true });
+        return;
+      }
+
+      if (req.method === 'GET' && url.pathname === '/manifest.json') {
+        json(res, 200, {
+          name: 'Social Butterfly',
+          short_name: 'Butterfly',
+          start_url: '/',
+          display: 'standalone',
+          background_color: '#141420',
+          theme_color: '#141420',
+          icons: [{ src: '/icon.png', sizes: '192x192', type: 'image/png' }],
+        });
+        return;
+      }
+
+      if (req.method === 'GET' && url.pathname === '/icon.png') {
+        const icon = path.join(ROOT, 'app/icon.png');
+        if (!fs.existsSync(icon)) return json(res, 404, { error: 'not found' });
+        res.writeHead(200, { 'content-type': 'image/png' });
+        fs.createReadStream(icon).pipe(res);
         return;
       }
 
@@ -207,6 +253,8 @@ export function startApp({ port = Number(process.env.PORT) || 4646, open = true 
     const url = `http://localhost:${port}`;
     console.log('');
     console.log(`🦋 social-butterfly dashboard → ${url}`);
+    const lan = lanUrl(port);
+    if (lan) console.log(`   on your phone (same wifi)   → ${lan}`);
     console.log('   (keep this window open; Ctrl+C to stop)');
     if (open) {
       const cmd =

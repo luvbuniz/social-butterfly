@@ -2,7 +2,7 @@
 import { parseArgs } from 'node:util';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadConfig, todayStr, ROOT } from '../src/util.js';
+import { loadConfig, todayStr, ROOT, readSecrets } from '../src/util.js';
 
 const HELP = `
 🦋 social-butterfly — content toolkit for stackadoo.com
@@ -132,7 +132,8 @@ try {
         auto: Boolean(values.auto),
         headed: Boolean(values.headed),
         steps: config.capture?.steps ?? [],
-        username: config.capture?.username ?? 'Butterfly',
+        username: config.capture?.username ?? '',
+        login: readSecrets().login ?? null,
       });
       break;
     }
