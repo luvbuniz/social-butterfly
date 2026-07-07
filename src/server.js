@@ -9,6 +9,27 @@ import { loadQueue, saveQueue, buildPlan, markDone, streak, skipItem, saveIdeaFo
 import { buildPack, shareLinks } from './pack.js';
 import { listMedia, resolveMedia, extractStills, makeClip, useToday, saveForLater, deleteMedia, findFfmpeg, INBOX_DIR } from './media.js';
 
+// Bump together with UI_VERSION in app/index.html on every release — lets the
+// dashboard notice when the running server is older than the page on disk.
+const APP_VERSION = 2;
+
+let qrCache = {};
+async function qrDataUrl(text) {
+  if (!text) return null;
+  if (qrCache[text] !== undefined) return qrCache[text];
+  try {
+    const QR = (await import('qrcode')).default;
+    qrCache[text] = await QR.toDataURL(text, {
+      margin: 1,
+      width: 200,
+      color: { dark: '#ffffff', light: '#1d1d2e' },
+    });
+  } catch {
+    qrCache[text] = null; // dependency not installed yet — URL text still shows
+  }
+  return qrCache[text];
+}
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.png': 'image/png',
@@ -95,6 +116,7 @@ export function createServer() {
         const queue = loadQueue();
         const ideas = generateIdeas(config, date, 4);
         json(res, 200, {
+          version: APP_VERSION,
           config: { site: config.site, socials: config.socials },
           date,
           ideas: ideas.map((i) => ({ ...i, links: shareLinks(config, i) })),
@@ -104,6 +126,7 @@ export function createServer() {
           ffmpeg: (() => { const f = findFfmpeg(); return { found: Boolean(f), full: Boolean(f?.full) }; })(),
           login: { saved: Boolean(readSecrets().login?.email), email: readSecrets().login?.email ?? '' },
           lanUrl: lanUrl(),
+          qr: await qrDataUrl(lanUrl()),
           stats: stats(queue, todayStr()),
         });
         return;
@@ -220,6 +243,18 @@ export function createServer() {
         if (!fs.existsSync(icon)) return json(res, 404, { error: 'not found' });
         res.writeHead(200, { 'content-type': 'image/png' });
         fs.createReadStream(icon).pipe(res);
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/upload') {
+        const raw = url.searchParams.get('name') || `upload-${Date.now()}`;
+        const safe = path.basename(raw).replace(/[^\w.\- ]+/g, '_');
+        const dest = path.join(ROOT, INBOX_DIR);
+        fs.mkdirSync(dest, { recursive: true });
+        const ws = fs.createWriteStream(path.join(dest, safe));
+        req.pipe(ws);
+        ws.on('finish', () => json(res, 200, { ok: true, name: safe }));
+        ws.on('error', (e) => json(res, 500, { error: e.message }));
         return;
       }
 

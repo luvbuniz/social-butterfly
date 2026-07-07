@@ -129,6 +129,10 @@
     <span class="flame" id="hdr-streak">🔥 —</span>
   </header>
 
+  <div id="update-banner" style="display:none;background:#eda100;color:#141420;font-weight:700;border-radius:12px;padding:12px 16px;margin-bottom:16px">
+    ⬆️ An update was downloaded. Close the black Social Butterfly window, then double-click StartButterfly.bat again to finish updating.
+  </div>
+
   <section class="card" id="today-card">
     <h2>⭐ Today's post</h2>
     <p class="sub">One idea per day keeps the accounts alive. Copy a caption, grab media below, press Post yourself.</p>
@@ -157,6 +161,12 @@
       </label>
       <label class="field">screenshots
         <input type="number" id="cap-shots" value="2" min="0" max="10">
+      </label>
+      <label class="field">add your own
+        <span class="btn ghost" style="cursor:pointer;position:relative;overflow:hidden">📤 upload photos/videos
+          <input type="file" id="upload-input" accept="image/*,video/*" multiple
+                 style="position:absolute;inset:0;opacity:0;cursor:pointer">
+        </span>
       </label>
       <label class="field">sign-in for capture <span style="font-size:.75rem">(stays on this computer)</span>
         <span class="row" style="gap:6px">
@@ -196,6 +206,15 @@
     <div class="loglist" id="loglist"></div>
   </section>
 
+  <section class="card" id="phone-card" style="display:none">
+    <h2>📱 On your phone</h2>
+    <p class="sub">Phone on the same wifi as this computer, and this window running. Scan the code (or type the address), then use your browser's <b>Add to Home Screen</b> for the butterfly icon. The 📤 upload button works from the phone too — recordings land straight in the inbox here.</p>
+    <div class="row">
+      <img id="phone-qr" alt="QR code" style="border-radius:12px;width:150px;height:150px">
+      <div id="phone-url" style="font-size:1.15rem;font-weight:700;word-break:break-all"></div>
+    </div>
+  </section>
+
   <footer>
     everything runs on your computer — nothing posts automatically ·
     <a href="https://github.com/luvbuniz/social-butterfly/blob/HEAD/docs/STRATEGY.md" target="_blank">strategy</a> ·
@@ -205,6 +224,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
+const UI_VERSION = 2; // keep in sync with APP_VERSION in src/server.js
 let STATE = null;
 let activeTab = 'tiktok';
 
@@ -226,7 +246,19 @@ async function api(path, body) {
 
 async function refresh() {
   STATE = await api('/api/state');
-  renderHeader(); renderToday(); renderGallery(); renderQueue(); renderResults();
+  if ((STATE.version ?? 0) < UI_VERSION) {
+    document.getElementById('update-banner').style.display = 'block';
+  }
+  renderHeader(); renderToday(); renderGallery(); renderQueue(); renderResults(); renderPhone();
+}
+
+function renderPhone() {
+  const card = document.getElementById('phone-card');
+  if (!STATE.lanUrl) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  document.getElementById('phone-url').textContent = STATE.lanUrl;
+  const img = document.getElementById('phone-qr');
+  if (STATE.qr) { img.src = STATE.qr; img.style.display = ''; } else { img.style.display = 'none'; }
 }
 
 function renderHeader() {
@@ -235,14 +267,6 @@ function renderHeader() {
   if (STATE.login?.saved && !$('#login-email').value) {
     $('#login-email').value = STATE.login.email;
     $('#login-pass').placeholder = '••••••• (saved)';
-  }
-  if (STATE.lanUrl) {
-    const f = document.querySelector('footer');
-    if (f && !f.dataset.lan) {
-      f.dataset.lan = '1';
-      f.insertAdjacentHTML('afterbegin',
-        `📱 on your phone (same wifi): <b>${STATE.lanUrl}</b> — open it and use "Add to Home Screen" for an app icon<br>`);
-    }
   }
 }
 
@@ -473,6 +497,18 @@ $('#cap-go').onclick = async () => {
   } finally {
     btn.disabled = false; btn.textContent = '📸 Capture';
   }
+};
+
+$('#upload-input').onchange = async (e) => {
+  const files = [...e.target.files];
+  for (const f of files) {
+    toast(`uploading ${f.name}…`);
+    const res = await fetch(`/api/upload?name=${encodeURIComponent(f.name)}`, { method: 'POST', body: f });
+    if (!res.ok) { toast('upload failed: ' + f.name); return; }
+  }
+  toast(`${files.length} file(s) in your inbox 📤`);
+  e.target.value = '';
+  await refresh();
 };
 
 $('#login-save').onclick = async () => {
