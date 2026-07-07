@@ -24,7 +24,8 @@ score range of your real game, and the `series.startDate` (the day you start the
 **Easiest way: double-click `StartButterfly.bat`** (in this folder). It installs
 anything missing, starts the app, and opens your browser at
 **http://localhost:4646**. Right-click the .bat → *Send to → Desktop (create
-shortcut)* for a desktop icon.
+shortcut)* for a desktop icon — then right-click the shortcut → *Properties →
+Change Icon → Browse* and pick `app\icon.ico` for the butterfly graphic.
 
 **On your phone (same wifi):** the terminal window and the dashboard footer show
 a `http://192.168.x.x:4646` address — open it in the phone browser and use

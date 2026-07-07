@@ -8,6 +8,7 @@ import { ROOT } from './util.js';
 const run = promisify(execFile);
 
 export const INBOX_DIR = 'content/inbox';
+export const SAVED_DIR = 'content/saved';
 const VIDEO_RE = /\.(webm|mp4|mov|m4v|mkv)$/i;
 const MEDIA_RE = /\.(webm|mp4|mov|m4v|mkv|png|jpe?g|gif|webp)$/i;
 
@@ -63,13 +64,15 @@ export function canProcess(name) {
 }
 
 function dirFor(config, src) {
-  return path.join(ROOT, src === 'inbox' ? INBOX_DIR : (config.capture?.outDir ?? 'content/captures'));
+  if (src === 'inbox') return path.join(ROOT, INBOX_DIR);
+  if (src === 'saved') return path.join(ROOT, SAVED_DIR);
+  return path.join(ROOT, config.capture?.outDir ?? 'content/captures');
 }
 
 /** Merged library: your imported recordings (inbox) + tool captures. */
 export function listMedia(config) {
   const out = [];
-  for (const src of ['inbox', 'capture']) {
+  for (const src of ['saved', 'inbox', 'capture']) {
     const dir = dirFor(config, src);
     if (!fs.existsSync(dir)) continue;
     for (const f of fs.readdirSync(dir)) {
@@ -168,4 +171,21 @@ export function useToday(config, src, name, date) {
   fs.mkdirSync(dest, { recursive: true });
   fs.copyFileSync(file, path.join(dest, path.basename(name)));
   return path.relative(ROOT, path.join(dest, path.basename(name)));
+}
+
+/** Move a file to content/saved/ so daily cleanups never touch it. */
+export function saveForLater(config, src, name) {
+  const file = resolveMedia(config, src, name);
+  const dest = path.join(ROOT, SAVED_DIR);
+  fs.mkdirSync(dest, { recursive: true });
+  const target = path.join(dest, path.basename(name));
+  fs.renameSync(file, target);
+  return path.relative(ROOT, target);
+}
+
+/** Permanently delete a capture/import/saved file. */
+export function deleteMedia(config, src, name) {
+  const file = resolveMedia(config, src, name);
+  fs.rmSync(file);
+  return true;
 }

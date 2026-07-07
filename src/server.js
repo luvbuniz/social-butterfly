@@ -5,9 +5,9 @@ import { spawn } from 'node:child_process';
 import os from 'node:os';
 import { ROOT, loadConfig, todayStr, addDays, readSecrets, writeSecrets } from './util.js';
 import { generateIdeas } from './ideas.js';
-import { loadQueue, saveQueue, buildPlan, markDone, streak } from './plan.js';
+import { loadQueue, saveQueue, buildPlan, markDone, streak, skipItem, saveIdeaForLater, removeSavedIdea, postSavedToday } from './plan.js';
 import { buildPack, shareLinks } from './pack.js';
-import { listMedia, resolveMedia, extractStills, makeClip, useToday, findFfmpeg, INBOX_DIR } from './media.js';
+import { listMedia, resolveMedia, extractStills, makeClip, useToday, saveForLater, deleteMedia, findFfmpeg, INBOX_DIR } from './media.js';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -99,6 +99,7 @@ export function createServer() {
           date,
           ideas: ideas.map((i) => ({ ...i, links: shareLinks(config, i) })),
           queue: queue.items,
+          savedIdeas: queue.savedIdeas,
           media: listMedia(config),
           ffmpeg: (() => { const f = findFfmpeg(); return { found: Boolean(f), full: Boolean(f?.full) }; })(),
           login: { saved: Boolean(readSecrets().login?.email), email: readSecrets().login?.email ?? '' },
@@ -175,9 +176,9 @@ export function createServer() {
         return;
       }
 
-      const mediaMatch = url.pathname.match(/^\/media\/(captures|inbox)\/(.+)$/);
+      const mediaMatch = url.pathname.match(/^\/media\/(captures|inbox|saved)\/(.+)$/);
       if (req.method === 'GET' && mediaMatch) {
-        const src = mediaMatch[1] === 'inbox' ? 'inbox' : 'capture';
+        const src = mediaMatch[1] === 'captures' ? 'capture' : mediaMatch[1];
         let file;
         try { file = resolveMedia(config, src, decodeURIComponent(mediaMatch[2])); }
         catch { return json(res, 404, { error: 'not found' }); }
@@ -206,16 +207,58 @@ export function createServer() {
           display: 'standalone',
           background_color: '#141420',
           theme_color: '#141420',
-          icons: [{ src: '/icon.png', sizes: '192x192', type: 'image/png' }],
+          icons: [
+            { src: '/icon.png', sizes: '192x192', type: 'image/png' },
+            { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+          ],
         });
         return;
       }
 
-      if (req.method === 'GET' && url.pathname === '/icon.png') {
-        const icon = path.join(ROOT, 'app/icon.png');
+      if (req.method === 'GET' && (url.pathname === '/icon.png' || url.pathname === '/icon-512.png')) {
+        const icon = path.join(ROOT, 'app', url.pathname === '/icon.png' ? 'icon.png' : 'icon-512.png');
         if (!fs.existsSync(icon)) return json(res, 404, { error: 'not found' });
         res.writeHead(200, { 'content-type': 'image/png' });
         fs.createReadStream(icon).pipe(res);
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/media-save') {
+        const { src, name } = await readBody(req);
+        json(res, 200, { ok: true, dest: saveForLater(config, src, name) });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/media-delete') {
+        const { src, name } = await readBody(req);
+        deleteMedia(config, src, name);
+        json(res, 200, { ok: true });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/queue-skip') {
+        const { id } = await readBody(req);
+        json(res, 200, { ok: Boolean(skipItem(id)) });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/idea-save') {
+        const { idea } = await readBody(req);
+        if (!idea?.id) return json(res, 400, { error: 'idea required' });
+        saveIdeaForLater(idea);
+        json(res, 200, { ok: true });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/saved-idea') {
+        const { id, action } = await readBody(req);
+        if (action === 'post-today') {
+          const item = postSavedToday(id, todayStr());
+          json(res, item ? 200 : 404, item ? { ok: true, id: item.id } : { error: 'not found' });
+          return;
+        }
+        removeSavedIdea(id);
+        json(res, 200, { ok: true });
         return;
       }
 

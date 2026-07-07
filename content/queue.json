@@ -1,69 +1,6 @@
 {
   "items": [
     {
-      "id": "2026-07-06-clip",
-      "date": "2026-07-06",
-      "pillar": "clip",
-      "pillarLabel": "🎬 Gameplay clip",
-      "hook": "Screen time you don't have to feel guilty about",
-      "platforms": [
-        "tiktok",
-        "instagram",
-        "youtube",
-        "facebook"
-      ],
-      "status": "todo",
-      "idea": {
-        "id": "2026-07-06-clip",
-        "date": "2026-07-06",
-        "pillar": "clip",
-        "pillarLabel": "🎬 Gameplay clip",
-        "headline": true,
-        "effort": "S",
-        "hook": "Screen time you don't have to feel guilty about",
-        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
-        "ctaBio": "Try it on the family tablet — link in bio (free)",
-        "platforms": [
-          "tiktok",
-          "instagram",
-          "youtube",
-          "facebook"
-        ],
-        "asset": "Record 15–30s of world-building with auto-play: use the Capture studio (auto-play ON) or `npm run capture -- --auto --record 25`. The \"problem solved → block earned\" moment is the money shot.",
-        "captions": {
-          "tiktok": {
-            "text": "Screen time you don't have to feel guilty about\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
-          },
-          "instagram": {
-            "text": "Screen time you don't have to feel guilty about\n\nTry it on the family tablet — link in bio (free)\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
-          },
-          "youtube": {
-            "title": "Screen time you don't have to feel guilty about",
-            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
-          },
-          "x": {
-            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
-          },
-          "facebook": {
-            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
-          },
-          "bluesky": {
-            "text": "Screen time you don't have to feel guilty about\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
-          },
-          "reddit": {
-            "title": "Screen time you don't have to feel guilty about",
-            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
-            "communities": [
-              "r/homeschool",
-              "/r/matheducation",
-              "r/EdTech"
-            ],
-            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
-          }
-        }
-      }
-    },
-    {
       "id": "2026-07-07-challenge",
       "date": "2026-07-07",
       "pillar": "challenge",
@@ -428,6 +365,70 @@
           }
         }
       }
+    },
+    {
+      "id": "2026-07-13-clip",
+      "date": "2026-07-13",
+      "pillar": "clip",
+      "pillarLabel": "🎬 Gameplay clip",
+      "hook": "No ads, no videos, no brain rot — just math and blocks",
+      "platforms": [
+        "tiktok",
+        "instagram",
+        "youtube",
+        "facebook"
+      ],
+      "status": "todo",
+      "idea": {
+        "id": "2026-07-13-clip",
+        "date": "2026-07-13",
+        "pillar": "clip",
+        "pillarLabel": "🎬 Gameplay clip",
+        "headline": true,
+        "effort": "S",
+        "hook": "No ads, no videos, no brain rot — just math and blocks",
+        "cta": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)",
+        "ctaBio": "Math they'll actually ask for — link in bio",
+        "platforms": [
+          "tiktok",
+          "instagram",
+          "youtube",
+          "facebook"
+        ],
+        "asset": "Record 15–30s of world-building with auto-play: use the Capture studio (auto-play ON) or `npm run capture -- --auto --record 25`. The \"problem solved → block earned\" moment is the money shot.",
+        "captions": {
+          "tiktok": {
+            "text": "No ads, no videos, no brain rot — just math and blocks\n\nMath they'll actually ask for — link in bio\n\n#stackadoo #mathforkids #kidsgames #momsoftiktok #dadsoftiktok #homeschool #kidsactivities #screentime"
+          },
+          "instagram": {
+            "text": "No ads, no videos, no brain rot — just math and blocks\n\nMath they'll actually ask for — link in bio\n\n#stackadoo #mathforkids #kidsgames #homeschooling #momlife #parentingtips #earlylearning #mathisfun #kidsapps #learningthroughplay"
+          },
+          "youtube": {
+            "title": "No ads, no videos, no brain rot — just math and blocks",
+            "description": "Try it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids #kidsgames #shorts"
+          },
+          "x": {
+            "text": "No ads, no videos, no brain rot — just math and blocks\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
+          },
+          "facebook": {
+            "text": "No ads, no videos, no brain rot — just math and blocks\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo #mathforkids"
+          },
+          "bluesky": {
+            "text": "No ads, no videos, no brain rot — just math and blocks\n\nTry it free on a tablet → stackadoo.com (Google Play version coming soon)\n\n#stackadoo"
+          },
+          "reddit": {
+            "title": "No ads, no videos, no brain rot — just math and blocks",
+            "body": "I'm a parent and the solo dev behind Stackadoo — a math game where kids build 3D worlds by solving problems (the math is the way you earn blocks). Free to play on tablets via the site; Google Play version on the way.\n\nhttps://stackadoo.com\n\nWould genuinely love feedback from other parents (be brutal).",
+            "communities": [
+              "r/homeschool",
+              "/r/matheducation",
+              "r/EdTech"
+            ],
+            "note": "Read each sub's self-promo rules first. Post as yourself, reply to every comment, and don't post the same thing to many subs on the same day."
+          }
+        }
+      }
     }
-  ]
+  ],
+  "savedIdeas": []
 }

@@ -4,7 +4,9 @@ import { loadJson, saveJson, todayStr, addDays } from './util.js';
 const QUEUE_PATH = 'content/queue.json';
 
 export function loadQueue() {
-  return loadJson(QUEUE_PATH, { items: [] });
+  const q = loadJson(QUEUE_PATH, { items: [] });
+  q.savedIdeas ??= [];
+  return q;
 }
 
 export function saveQueue(queue) {
@@ -44,7 +46,60 @@ export function buildPlan(config, { days = 7, start = todayStr() } = {}) {
 }
 
 export function itemsForDate(queue, date) {
-  return queue.items.filter((it) => it.date === date);
+  return queue.items.filter((it) => it.date === date && it.status !== 'skipped');
+}
+
+/** Hide a queue item without letting `plan` re-add it (id stays known). */
+export function skipItem(id) {
+  const queue = loadQueue();
+  const item = queue.items.find((it) => it.id === id);
+  if (!item) return null;
+  item.status = 'skipped';
+  saveQueue(queue);
+  return item;
+}
+
+/** Shelve an idea to post on some other day. */
+export function saveIdeaForLater(idea) {
+  const queue = loadQueue();
+  if (!queue.savedIdeas.some((s) => s.idea.id === idea.id)) {
+    queue.savedIdeas.push({ idea, savedAt: new Date().toISOString() });
+  }
+  const item = queue.items.find((it) => it.id === idea.id);
+  if (item && item.status === 'todo') item.status = 'skipped';
+  saveQueue(queue);
+  return queue.savedIdeas.length;
+}
+
+export function removeSavedIdea(ideaId) {
+  const queue = loadQueue();
+  queue.savedIdeas = queue.savedIdeas.filter((s) => s.idea.id !== ideaId);
+  saveQueue(queue);
+}
+
+/** Pull a shelved idea back in as today's post. */
+export function postSavedToday(ideaId, today) {
+  const queue = loadQueue();
+  const saved = queue.savedIdeas.find((s) => s.idea.id === ideaId);
+  if (!saved) return null;
+  queue.savedIdeas = queue.savedIdeas.filter((s) => s.idea.id !== ideaId);
+  const idea = { ...saved.idea, date: today };
+  const newId = `${today}-${idea.pillar}-saved`;
+  queue.items = queue.items.filter((it) => it.id !== newId);
+  const item = {
+    id: newId,
+    date: today,
+    pillar: idea.pillar,
+    pillarLabel: idea.pillarLabel,
+    hook: idea.hook,
+    platforms: idea.platforms,
+    status: 'todo',
+    idea: { ...idea, id: newId },
+  };
+  queue.items.push(item);
+  queue.items.sort((a, b) => a.date.localeCompare(b.date));
+  saveQueue(queue);
+  return item;
 }
 
 export function markDone(id) {

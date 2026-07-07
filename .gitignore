@@ -3,6 +3,8 @@ content/captures/
 content/packs/
 content/inbox/*
 !content/inbox/.gitkeep
+content/saved/*
+!content/saved/.gitkeep
 content/queue-export.csv
 .DS_Store
 *.log

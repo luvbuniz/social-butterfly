@@ -81,6 +81,8 @@
   .shot .meta { padding: 6px 9px 2px; font-size: .78rem; color: var(--text-3); word-break: break-all; }
   .shot .tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px 7px 8px; }
   .btn.mini { padding: 4px 8px; font-size: .78rem; border-radius: 7px; }
+  .btn.danger:hover { background: #e34948; color: #fff; border-color: #e34948; }
+  ul.queue .qtools { margin-left: auto; display: flex; gap: 4px; }
   .field { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--text-3); }
   select, input[type=number] {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
@@ -179,6 +181,7 @@
     <h2>🗓 This week</h2>
     <p class="sub">Mon–Sun pillar rotation. Tick a post when it's live — that feeds your streak.</p>
     <ul class="queue" id="queue"></ul>
+    <div id="shelf"></div>
     <div class="row" style="margin-top:12px">
       <button class="btn ghost" id="plan-btn">＋ Plan next 7 days</button>
       <button class="btn ghost" id="pack-btn">📦 Build today's post pack</button>
@@ -271,6 +274,7 @@ function renderToday() {
     <div class="row">
       <button class="btn" id="copy-btn">📋 Copy ${esc(activeTab)} caption</button>
       <button class="btn ${posted ? 'ghost' : 'good'}" id="posted-btn">${posted ? '✓ posted today' : '✅ Mark as posted'}</button>
+      <button class="btn ghost" id="shelve-btn">💾 save for later</button>
     </div>
     <div class="sharebar">${links}</div>
     <div style="color:var(--text-3);font-size:.85rem">share buttons open a prefilled compose window — you press Post. TikTok/IG/YouTube: upload media there and paste the caption.</div>
@@ -285,6 +289,11 @@ function renderToday() {
   $('#copy-btn').onclick = async () => {
     await navigator.clipboard.writeText(captionText(idea.captions[activeTab]));
     toast('caption copied — paste it in the app');
+  };
+  $('#shelve-btn').onclick = async () => {
+    await api('/api/idea-save', { idea });
+    toast('saved for later — find it under This week 💾');
+    await refresh();
   };
   $('#posted-btn').onclick = async () => {
     if (!queued) await api('/api/plan', { days: 1 });
@@ -303,11 +312,13 @@ function renderGallery() {
       ? `<video src="${src}" controls muted loop preload="metadata"></video>`
       : `<a href="${src}" target="_blank"><img src="${src}" loading="lazy" alt="${esc(c.name)}"></a>`;
     const wide = c.name.includes('-wide') ? ' wide' : '';
-    const badge = c.src === 'inbox' ? '📥 yours' : '📸 captured';
+    const badge = c.src === 'inbox' ? '📥 yours' : c.src === 'saved' ? '💾 saved' : '📸 captured';
     const tools = [
       `<button class="btn ghost mini" data-act="use" data-src="${c.src}" data-name="${esc(c.name)}">⭐ use today</button>`,
       c.video && c.canProcess ? `<button class="btn ghost mini" data-act="stills" data-src="${c.src}" data-name="${esc(c.name)}">🖼 6 stills</button>` : '',
       c.video && c.canProcess ? `<button class="btn ghost mini" data-act="clip" data-src="${c.src}" data-name="${esc(c.name)}">✂️ 15s clip</button>` : '',
+      c.src !== 'saved' ? `<button class="btn ghost mini" data-act="save" data-src="${c.src}" data-name="${esc(c.name)}">💾 keep</button>` : '',
+      `<button class="btn ghost mini danger" data-act="del" data-src="${c.src}" data-name="${esc(c.name)}">🗑</button>`,
     ].join('');
     return `<div class="shot${wide}">${media}
       <div class="meta">${badge} · ${esc(c.name)} · ${(c.size/1024/1024).toFixed(1)}MB</div>
@@ -328,23 +339,71 @@ function renderGallery() {
       if (act === 'use') { await api('/api/use-today', { src, name }); toast('added to today\'s post pack ⭐'); }
       if (act === 'stills') { const r = await api('/api/stills', { src, name }); toast(`${r.files.length} screenshots pulled 🖼`); await refresh(); }
       if (act === 'clip') { const r = await api('/api/clip', { src, name, seconds: 15 }); toast(`clip ready: ${r.file} ✂️`); await refresh(); }
+      if (act === 'save') { await api('/api/media-save', { src, name }); toast('kept in content/saved 💾'); await refresh(); }
+      if (act === 'del') {
+        if (!confirm(`Delete ${name}? This can't be undone.`)) return;
+        await api('/api/media-delete', { src, name });
+        toast('deleted 🗑');
+        await refresh();
+      }
     } catch (err) { toast('failed: ' + err.message); }
     finally { btn.disabled = false; }
   };
 }
 
 function renderQueue() {
-  $('#queue').innerHTML = STATE.queue.map((it) => `
+  const items = STATE.queue.filter((it) => it.status !== 'skipped');
+  $('#queue').innerHTML = items.map((it) => `
     <li class="${it.status==='done'?'done':''}">
       <input type="checkbox" data-id="${esc(it.id)}" ${it.status==='done'?'checked':''}>
       <span class="qdate">${it.date}</span>
       <span class="chip">${esc(it.pillarLabel)}</span>
       <span class="qhook">${esc(it.hook)}</span>
+      <span class="qtools">
+        <button class="btn ghost mini" data-qact="shelve" data-id="${esc(it.id)}" title="save for another day">💾</button>
+        <button class="btn ghost mini danger" data-qact="skip" data-id="${esc(it.id)}" title="remove this post">🗑</button>
+      </span>
     </li>`).join('') || '<li style="color:var(--text-3);border:0">queue is empty — plan a week below</li>';
+
+  const shelf = STATE.savedIdeas ?? [];
+  $('#shelf').innerHTML = shelf.length ? `
+    <div style="color:var(--text-3);font-size:.85rem;margin:14px 0 6px">💾 saved for later</div>
+    ${shelf.map((s) => `
+      <li style="list-style:none;display:flex;gap:12px;align-items:center;padding:7px 4px;border-bottom:1px solid var(--border)">
+        <span class="chip">${esc(s.idea.pillarLabel)}</span>
+        <span class="qhook" style="color:var(--text-2)">${esc(s.idea.hook)}</span>
+        <span class="qtools">
+          <button class="btn ghost mini" data-sact="post-today" data-id="${esc(s.idea.id)}">post today</button>
+          <button class="btn ghost mini danger" data-sact="delete" data-id="${esc(s.idea.id)}">🗑</button>
+        </span>
+      </li>`).join('')}` : '';
+
   $('#queue').onchange = async (e) => {
     const cb = e.target.closest('input[data-id]');
     if (!cb) return;
     await api('/api/done', { id: cb.dataset.id, undo: !cb.checked });
+    await refresh();
+  };
+  $('#queue').onclick = async (e) => {
+    const btn = e.target.closest('button[data-qact]');
+    if (!btn) return;
+    const it = STATE.queue.find((q) => q.id === btn.dataset.id);
+    if (btn.dataset.qact === 'shelve' && it) {
+      await api('/api/idea-save', { idea: it.idea });
+      toast('saved for later 💾');
+    } else if (btn.dataset.qact === 'skip') {
+      if (!confirm('Remove this post from the plan?')) return;
+      await api('/api/queue-skip', { id: btn.dataset.id });
+      toast('removed 🗑');
+    }
+    await refresh();
+  };
+  $('#shelf').onclick = async (e) => {
+    const btn = e.target.closest('button[data-sact]');
+    if (!btn) return;
+    if (btn.dataset.sact === 'delete' && !confirm('Delete this saved idea?')) return;
+    await api('/api/saved-idea', { id: btn.dataset.id, action: btn.dataset.sact });
+    toast(btn.dataset.sact === 'post-today' ? 'added to today 🗓' : 'deleted 🗑');
     await refresh();
   };
 }
