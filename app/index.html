@@ -75,7 +75,9 @@
   .shot { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   .shot img, .shot video { width: 100%; aspect-ratio: 9/16; object-fit: cover; display: block; background: #000; }
   .shot.wide img, .shot.wide video { aspect-ratio: 16/9; }
-  .shot .meta { padding: 6px 9px; font-size: .78rem; color: var(--text-3); word-break: break-all; }
+  .shot .meta { padding: 6px 9px 2px; font-size: .78rem; color: var(--text-3); word-break: break-all; }
+  .shot .tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 5px 7px 8px; }
+  .btn.mini { padding: 4px 8px; font-size: .78rem; border-radius: 7px; }
   .field { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--text-3); }
   select, input[type=number] {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
@@ -130,7 +132,7 @@
 
   <section class="card">
     <h2>📸 Capture studio</h2>
-    <p class="sub">Films the site with a real browser — screenshots and video land in <code>content/captures/</code> and show up here.</p>
+    <p class="sub">Films the site with a real browser — or drop your own screen recordings & photos into <code>content/inbox/</code> and they appear below. Tip: screen-and-hands footage of kids playing is perfect; keep faces and real names out of public posts.</p>
     <div class="row">
       <label class="field">target
         <select id="cap-url">
@@ -151,10 +153,11 @@
       <label class="field">screenshots
         <input type="number" id="cap-shots" value="2" min="0" max="10">
       </label>
-      <label class="field">auto-play
-        <select id="cap-auto">
-          <option value="">off — film the page as-is</option>
-          <option value="1" selected>🎮 press Play, type name, answer questions</option>
+      <label class="field">mode
+        <select id="cap-mode">
+          <option value="auto" selected>🎮 robot plays (Play → name → answers math)</option>
+          <option value="headed">🕹 I'll play it myself (opens a window, films it)</option>
+          <option value="">just film the page as-is</option>
         </select>
       </label>
       <button class="btn" id="cap-go">📸 Capture</button>
@@ -270,14 +273,42 @@ function renderToday() {
 }
 
 function renderGallery() {
-  $('#gallery').innerHTML = STATE.captures.map((c) => {
-    const src = `/media/captures/${encodeURIComponent(c.name)}`;
+  const ff = STATE.ffmpeg ?? {};
+  const items = STATE.media.map((c) => {
+    const srcDir = c.src === 'inbox' ? 'inbox' : 'captures';
+    const src = `/media/${srcDir}/${encodeURIComponent(c.name)}`;
     const media = c.video
-      ? `<video src="${src}" controls muted loop></video>`
+      ? `<video src="${src}" controls muted loop preload="metadata"></video>`
       : `<a href="${src}" target="_blank"><img src="${src}" loading="lazy" alt="${esc(c.name)}"></a>`;
     const wide = c.name.includes('-wide') ? ' wide' : '';
-    return `<div class="shot${wide}">${media}<div class="meta">${esc(c.name)} · ${(c.size/1024/1024).toFixed(1)}MB</div></div>`;
-  }).join('') || '<div style="color:var(--text-3)">no captures yet — hit 📸 Capture above</div>';
+    const badge = c.src === 'inbox' ? '📥 yours' : '📸 captured';
+    const tools = [
+      `<button class="btn ghost mini" data-act="use" data-src="${c.src}" data-name="${esc(c.name)}">⭐ use today</button>`,
+      c.video && c.canProcess ? `<button class="btn ghost mini" data-act="stills" data-src="${c.src}" data-name="${esc(c.name)}">🖼 6 stills</button>` : '',
+      c.video && c.canProcess ? `<button class="btn ghost mini" data-act="clip" data-src="${c.src}" data-name="${esc(c.name)}">✂️ 15s clip</button>` : '',
+    ].join('');
+    return `<div class="shot${wide}">${media}
+      <div class="meta">${badge} · ${esc(c.name)} · ${(c.size/1024/1024).toFixed(1)}MB</div>
+      <div class="tools">${tools}</div></div>`;
+  }).join('');
+  const needFfmpeg = STATE.media.some((c) => c.video && !c.canProcess);
+  const hint = needFfmpeg
+    ? `<div style="grid-column:1/-1;color:var(--text-3);font-size:.85rem">💡 to cut clips / pull stills from phone recordings, install ffmpeg once (Windows: <code>winget install --id Gyan.FFmpeg</code>, then restart the app). Until then, "use today" copies the full file — TikTok/Instagram can trim on upload.</div>`
+    : '';
+  $('#gallery').innerHTML = (items || '<div style="color:var(--text-3)">nothing yet — hit 📸 Capture, or drop recordings into <code>content/inbox/</code></div>') + hint;
+
+  $('#gallery').onclick = async (e) => {
+    const btn = e.target.closest('button[data-act]');
+    if (!btn) return;
+    const { act, src, name } = btn.dataset;
+    btn.disabled = true;
+    try {
+      if (act === 'use') { await api('/api/use-today', { src, name }); toast('added to today\'s post pack ⭐'); }
+      if (act === 'stills') { const r = await api('/api/stills', { src, name }); toast(`${r.files.length} screenshots pulled 🖼`); await refresh(); }
+      if (act === 'clip') { const r = await api('/api/clip', { src, name, seconds: 15 }); toast(`clip ready: ${r.file} ✂️`); await refresh(); }
+    } catch (err) { toast('failed: ' + err.message); }
+    finally { btn.disabled = false; }
+  };
 }
 
 function renderQueue() {
@@ -351,7 +382,8 @@ $('#cap-go').onclick = async () => {
       preset: $('#cap-preset').value,
       record: Number($('#cap-record').value),
       shots: Number($('#cap-shots').value),
-      auto: Boolean($('#cap-auto').value),
+      auto: $('#cap-mode').value === 'auto',
+      headed: $('#cap-mode').value === 'headed',
     });
     toast(`${r.files.length} file(s) captured`);
     await refresh();

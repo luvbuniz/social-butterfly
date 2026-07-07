@@ -32,6 +32,7 @@ const HELP = `
               --full-page     make the first screenshot full-page
               --auto          press Play, type a username, answer math questions
                               (scripted steps: capture.steps in butterfly.config.json)
+              --headed        open a visible browser window so YOU play while it films
   export    write the queue as CSV (content/queue-export.csv)
   app       open the point-and-click dashboard in your browser (npm start)
   help      this text
@@ -56,6 +57,7 @@ const opts = {
   wait: { type: 'string' },
   scroll: { type: 'boolean' },
   auto: { type: 'boolean' },
+  headed: { type: 'boolean' },
   'full-page': { type: 'boolean' },
   full: { type: 'boolean' },
   json: { type: 'boolean' },
@@ -128,6 +130,7 @@ try {
         fullPage: Boolean(values['full-page']),
         outDir: config.capture?.outDir,
         auto: Boolean(values.auto),
+        headed: Boolean(values.headed),
         steps: config.capture?.steps ?? [],
         username: config.capture?.username ?? 'Butterfly',
       });

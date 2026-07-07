@@ -1,6 +1,8 @@
 node_modules/
 content/captures/
 content/packs/
+content/inbox/*
+!content/inbox/.gitkeep
 content/queue-export.csv
 .DS_Store
 *.log

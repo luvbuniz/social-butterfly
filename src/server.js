@@ -6,6 +6,7 @@ import { ROOT, loadConfig, todayStr, addDays } from './util.js';
 import { generateIdeas } from './ideas.js';
 import { loadQueue, saveQueue, buildPlan, markDone, streak } from './plan.js';
 import { buildPack, shareLinks } from './pack.js';
+import { listMedia, resolveMedia, extractStills, makeClip, useToday, findFfmpeg, INBOX_DIR } from './media.js';
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -13,6 +14,11 @@ const MIME = {
   '.jpg': 'image/jpeg',
   '.webm': 'video/webm',
   '.mp4': 'video/mp4',
+  '.mov': 'video/quicktime',
+  '.m4v': 'video/mp4',
+  '.gif': 'image/gif',
+  '.webp': 'image/webp',
+  '.jpeg': 'image/jpeg',
 };
 
 function json(res, status, data) {
@@ -32,20 +38,6 @@ function readBody(req) {
       }
     });
   });
-}
-
-function listCaptures(config) {
-  const dir = path.join(ROOT, config.capture?.outDir ?? 'content/captures');
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => /\.(png|jpg|webm|mp4)$/i.test(f))
-    .map((f) => {
-      const st = fs.statSync(path.join(dir, f));
-      return { name: f, size: st.size, mtime: st.mtimeMs, video: /\.(webm|mp4)$/i.test(f) };
-    })
-    .sort((a, b) => b.mtime - a.mtime)
-    .slice(0, 24);
 }
 
 function weekStart(dateStr) {
@@ -97,7 +89,8 @@ export function createServer() {
           date,
           ideas: ideas.map((i) => ({ ...i, links: shareLinks(config, i) })),
           queue: queue.items,
-          captures: listCaptures(config),
+          media: listMedia(config),
+          ffmpeg: (() => { const f = findFfmpeg(); return { found: Boolean(f), full: Boolean(f?.full) }; })(),
           stats: stats(queue, todayStr()),
         });
         return;
@@ -161,6 +154,7 @@ export function createServer() {
           wait: Number(body.wait ?? 3),
           outDir: config.capture?.outDir,
           auto: Boolean(body.auto),
+          headed: Boolean(body.headed),
           steps: config.capture?.steps ?? [],
           username: config.capture?.username ?? 'Butterfly',
         });
@@ -168,12 +162,35 @@ export function createServer() {
         return;
       }
 
-      if (req.method === 'GET' && url.pathname.startsWith('/media/captures/')) {
-        const name = path.basename(decodeURIComponent(url.pathname));
-        const file = path.join(ROOT, loadConfig().capture?.outDir ?? 'content/captures', name);
-        if (!fs.existsSync(file)) return json(res, 404, { error: 'not found' });
-        res.writeHead(200, { 'content-type': MIME[path.extname(name).toLowerCase()] ?? 'application/octet-stream' });
+      const mediaMatch = url.pathname.match(/^\/media\/(captures|inbox)\/(.+)$/);
+      if (req.method === 'GET' && mediaMatch) {
+        const src = mediaMatch[1] === 'inbox' ? 'inbox' : 'capture';
+        let file;
+        try { file = resolveMedia(config, src, decodeURIComponent(mediaMatch[2])); }
+        catch { return json(res, 404, { error: 'not found' }); }
+        res.writeHead(200, { 'content-type': MIME[path.extname(file).toLowerCase()] ?? 'application/octet-stream' });
         fs.createReadStream(file).pipe(res);
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/use-today') {
+        const { src, name } = await readBody(req);
+        const dest = useToday(config, src, name, todayStr());
+        json(res, 200, { ok: true, dest });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/stills') {
+        const { src, name, count } = await readBody(req);
+        const files = await extractStills(config, src, name, Number(count ?? 6));
+        json(res, 200, { ok: true, files });
+        return;
+      }
+
+      if (req.method === 'POST' && url.pathname === '/api/clip') {
+        const { src, name, seconds } = await readBody(req);
+        const file = await makeClip(config, src, name, { seconds: Number(seconds ?? 15) });
+        json(res, 200, { ok: true, file });
         return;
       }
 

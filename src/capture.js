@@ -9,16 +9,17 @@ export const PRESETS = {
   square: { width: 1080, height: 1080 },   // Instagram feed (1:1)
 };
 
-async function launchChromium() {
+async function launchChromium(headed = false) {
   const { chromium } = await import('playwright');
+  const opts = headed ? { headless: false } : {};
   try {
-    return await chromium.launch();
+    return await chromium.launch(opts);
   } catch (err) {
     // Managed environments (e.g. Claude Code cloud) pre-install Chromium at a
     // fixed path that may not match this playwright version's expected build.
     const fallback = process.env.BUTTERFLY_CHROMIUM || '/opt/pw-browsers/chromium';
     if (fs.existsSync(fallback)) {
-      return await chromium.launch({ executablePath: fallback });
+      return await chromium.launch({ ...opts, executablePath: fallback });
     }
     throw err;
   }
@@ -120,6 +121,7 @@ export async function capture({
   fullPage = false,
   outDir,
   auto = false,
+  headed = false,
   steps = [],
   username = 'Butterfly',
 } = {}) {
@@ -130,7 +132,8 @@ export async function capture({
   const base = `capture-${stamp}-${preset}`;
   const saved = [];
 
-  const browser = await launchChromium();
+  const browser = await launchChromium(headed);
+  if (headed) console.log('🕹  headed mode: a browser window is open — play the game yourself; filming for the set duration');
   const context = await browser.newContext({
     viewport: size,
     ...(record > 0 ? { recordVideo: { dir, size } } : {}),

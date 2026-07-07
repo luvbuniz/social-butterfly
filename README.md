@@ -62,6 +62,23 @@ of posting; see `site-snippets/README.md`.
 | `npm run demo` | Capture the bundled demo page (sanity check, works offline) |
 | `node bin/butterfly.js export` | Queue → CSV (for schedulers or a spreadsheet) |
 
+## Your own recordings (the good stuff)
+
+Real footage of kids playing beats anything a robot can film. Drop screen
+recordings and screenshots (mp4/mov/webm/png/jpg) into **`content/inbox/`** —
+they appear in the dashboard gallery marked "📥 yours", playable in place, with:
+
+- **⭐ use today** — copies the file into today's post pack
+- **🖼 6 stills** — pulls six evenly-spaced screenshots out of a video
+- **✂️ 15s clip** — cuts a share-ready 15-second clip (original quality + sound)
+
+Stills/clip need ffmpeg for phone-format videos: on Windows run
+`winget install --id Gyan.FFmpeg` once and restart the app. Without it,
+"use today" still works — TikTok/Instagram trim on upload anyway.
+
+Privacy rule of thumb: screen-and-hands footage is perfect; keep kids' faces
+and real names out of public posts.
+
 ## The capture tool (your in-house "Hermes")
 
 Points a real Chromium at the site, waits, optionally auto-scrolls, and saves
